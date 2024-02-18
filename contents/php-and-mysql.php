@@ -71,7 +71,10 @@ $php_and_mysql_data = [
       [
         'title' => 'Chapter 4: Objects & Classes',
         'folder_name' => 'c04',
-        'pages' => [],
+        'pages' => [
+          'objects-and-properties.php',
+          'objects-and-methods.php',
+        ],
       ],
     ],
   ],
