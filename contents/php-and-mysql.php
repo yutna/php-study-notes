@@ -68,6 +68,11 @@ $php_and_mysql_data = [
           'example.php',
         ],
       ],
+      [
+        'title' => 'Chapter 4: Objects & Classes',
+        'folder_name' => 'c04',
+        'pages' => [],
+      ],
     ],
   ],
 ];
