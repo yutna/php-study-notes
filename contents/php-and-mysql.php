@@ -74,6 +74,11 @@ $php_and_mysql_data = [
         'pages' => [
           'objects-and-properties.php',
           'objects-and-methods.php',
+          'constructor-methods.php',
+          'getters-and-setters.php',
+          'array-in-object.php',
+          'object-in-object.php',
+          'example.php',
         ],
       ],
     ],
