@@ -82,6 +82,13 @@ $php_and_mysql_data = [
         ],
       ],
     ],
+    'section-b' => [
+      [
+        'title' => 'Intro',
+        'folder_name' => 'intro',
+        'pages' => [],
+      ],
+    ],
   ],
 ];
 
