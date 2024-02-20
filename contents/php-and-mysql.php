@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $php_and_mysql_data = [
     'heading' => 'PHP and MySQL - Server-Side Web Development',
     'sections' => [
@@ -92,28 +94,36 @@ $php_and_mysql_data = [
     ],
 ];
 
-function get_php_and_mysql_heading($heading_string)
+function format_php_and_mysql_dashed_case_to_sentence(string $dashed_case): string
+{
+    $removed_extension = str_replace(['.php'], '', $dashed_case);
+    $removed_dashed = str_replace(['-'], ' ', $removed_extension);
+
+    return ucwords($removed_dashed);
+}
+
+function get_php_and_mysql_heading(string $heading_string): string
 {
     return '<h1>' . $heading_string . '</h1>';
 }
 
-function get_section_name_heading($section_name)
+function get_php_and_mysql_section_name_heading(string $section_name): string
 {
-    return '<h2>' . format_dashed_case_to_sentence($section_name) . '</h2>';
+    return '<h2>' . format_php_and_mysql_dashed_case_to_sentence($section_name) . '</h2>';
 }
 
-function get_section_content_heading($section_content_name)
+function get_php_and_mysql_section_content_heading(string $section_content_name): string
 {
     return '<h3>' . $section_content_name . '</h3>';
 }
 
-function get_page_list($url, $pages)
+function get_php_and_mysql_page_list(string $url, array $pages): string
 {
     $html_content = '';
 
     foreach ($pages as $page) {
         $link_url = $url . '/' . $page;
-        $text = format_dashed_case_to_sentence($page);
+        $text = format_php_and_mysql_dashed_case_to_sentence($page);
 
         $html_content .= '<li>';
         $html_content .= "<a target=\"_blank\" href=\"$link_url\">$text</a>";
@@ -123,7 +133,7 @@ function get_page_list($url, $pages)
     return $html_content;
 }
 
-function get_section_contents($base_url, $section_contents)
+function get_php_and_mysql_section_contents(string $base_url, array $section_contents): string
 {
     $html_content = '';
 
@@ -132,7 +142,7 @@ function get_section_contents($base_url, $section_contents)
 
         foreach ($contents as $key => $value) {
             if ($key === 'title') {
-                $html_content .= get_section_content_heading($value);
+                $html_content .= get_php_and_mysql_section_content_heading($value);
             }
 
             if ($key === 'folder_name') {
@@ -141,7 +151,7 @@ function get_section_contents($base_url, $section_contents)
 
             if ($key === 'pages') {
                 $html_content .= '<ul>';
-                $html_content .= get_page_list($base_url_with_folder_name, $value);
+                $html_content .= get_php_and_mysql_page_list($base_url_with_folder_name, $value);
                 $html_content .= '</ul>';
             }
         }
@@ -150,22 +160,22 @@ function get_section_contents($base_url, $section_contents)
     return $html_content;
 }
 
-function get_php_and_mysql_sections($base_url, $sections)
+function get_php_and_mysql_sections(array $sections): string
 {
     $html_content = '';
-    $base_url_with_section_name = $base_url . '/';
+    $base_url_with_section_name = '/php-and-mysql/';
 
     foreach ($sections as $section_name => $section_contents) {
         $base_url_with_section_name .= $section_name;
 
-        $html_content .= get_section_name_heading($section_name);
-        $html_content .= get_section_contents($base_url_with_section_name, $section_contents);
+        $html_content .= get_php_and_mysql_section_name_heading($section_name);
+        $html_content .= get_php_and_mysql_section_contents($base_url_with_section_name, $section_contents);
     }
 
     return $html_content;
 }
 
-function get_php_and_mysql_contents($base_url, $php_and_mysql_data)
+function get_php_and_mysql_contents(array $php_and_mysql_data): string
 {
     $html_content = '';
 
@@ -175,7 +185,7 @@ function get_php_and_mysql_contents($base_url, $php_and_mysql_data)
         }
 
         if ($key === 'sections') {
-            $html_content .= get_php_and_mysql_sections($base_url, $value);
+            $html_content .= get_php_and_mysql_sections($value);
         }
     }
 
