@@ -88,7 +88,13 @@ $php_and_mysql_data = [
             [
                 'title' => 'Intro',
                 'folder_name' => 'intro',
-                'pages' => [],
+                'pages' => [
+                    'server-superglobal.php',
+                    'var-dump.php',
+                    'error1.php',
+                    'error2.php',
+                    'phpinfo.php',
+                ],
             ],
         ],
     ],
@@ -163,10 +169,9 @@ function get_php_and_mysql_section_contents(string $base_url, array $section_con
 function get_php_and_mysql_sections(array $sections): string
 {
     $html_content = '';
-    $base_url_with_section_name = '/php-and-mysql/';
 
     foreach ($sections as $section_name => $section_contents) {
-        $base_url_with_section_name .= $section_name;
+        $base_url_with_section_name = '/php-and-mysql/' . $section_name;
 
         $html_content .= get_php_and_mysql_section_name_heading($section_name);
         $html_content .= get_php_and_mysql_section_contents($base_url_with_section_name, $section_contents);
