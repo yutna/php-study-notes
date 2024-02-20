@@ -1,5 +1,6 @@
     <footer>
-      <?php echo date('Y'); ?>
+        <?php echo date('Y'); ?>
     </footer>
-  </body>
+</body>
+
 </html>

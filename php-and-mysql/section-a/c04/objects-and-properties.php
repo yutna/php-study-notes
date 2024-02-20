@@ -1,26 +1,26 @@
 <?php
-  class Customer
-  {
+class Customer
+{
     public string $forename;
     public string $surname;
     public string $email;
     public string $password;
-  }
+}
 
-  class Account
-  {
+class Account
+{
     public int $number;
     public string $type;
     public float $balance;
-  }
+}
 
-  $customer = new Customer();
-  $customer->forename = 'Yutthana';
-  $customer->surname = 'Siphuengchai';
-  $customer->email = 'ivy@eg.link';
+$customer = new Customer();
+$customer->forename = 'Yutthana';
+$customer->surname = 'Siphuengchai';
+$customer->email = 'ivy@eg.link';
 
-  $account = new Account();
-  $account->balance = 1000.00;
+$account = new Account();
+$account->balance = 1000.00;
 ?>
 
 <?php include 'includes/header.php' ?>

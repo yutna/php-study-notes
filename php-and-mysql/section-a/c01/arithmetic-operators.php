@@ -1,20 +1,22 @@
 <?php
-  $items = 3;
-  $cost = 5;
-  $subtotal = $cost * $items;
-  $tax = $subtotal * 0.2;
-  $total = $subtotal + $tax;
+$items = 3;
+$cost = 5;
+$subtotal = $cost * $items;
+$tax = $subtotal * 0.2;
+$total = $subtotal + $tax;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arithmetic Operators</title>
     <link rel="stylesheet" href="css/styles.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>The Candy Store</h1>
     <h2>Shopping Cart</h2>
     <p>Items: <?= $items ?></p>
@@ -22,5 +24,6 @@
     <p>Subtotal: $<?= $subtotal ?></p>
     <p>Tax: $<?= $tax ?></p>
     <p>Total: $<?= $total ?></p>
-  </body>
+</body>
+
 </html>
