@@ -5,7 +5,7 @@ declare(strict_types=1);
 $price = 4.5;
 $quantity = 3;
 
-function calculate_total(int | float $price, int $quantity): int | float
+function calculate_total(float $price, int $quantity): float
 {
     return $price * $quantity;
 }

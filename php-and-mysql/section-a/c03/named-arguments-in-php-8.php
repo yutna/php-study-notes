@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function calculate_cost(int $cost, int $quantity, int $discount = 0, int $tax = 20): int | float
+function calculate_cost(int $cost, int $quantity, int $discount = 0, int $tax = 20): float
 {
     $cost = $cost * $quantity;
     $tax = $cost * ($tax / 100);
