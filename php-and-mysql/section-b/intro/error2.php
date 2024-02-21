@@ -1,4 +1,5 @@
 <?php
 echo 'Hello ';
-username = 'Ivy';
+// Uncomment the statement below to display the error.
+// username = 'Ivy';
 ?>
