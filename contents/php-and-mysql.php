@@ -114,6 +114,13 @@ $php_and_mysql_data = [
                     'files.php',
                 ],
             ],
+            [
+                'title' => 'Chapter 6: Getting Data From Browsers',
+                'folder_name' => 'c06',
+                'pages' => [
+                    'get-1.php?city=London',
+                ],
+            ],
         ],
     ],
 ];
