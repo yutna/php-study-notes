@@ -218,8 +218,9 @@ function get_php_and_mysql_sections(array $sections): string
     return $html_content;
 }
 
-function get_php_and_mysql_contents(array $php_and_mysql_data): string
+function get_php_and_mysql_contents(): string
 {
+    global $php_and_mysql_data;
     $html_content = '';
 
     foreach ($php_and_mysql_data as $key => $value) {
