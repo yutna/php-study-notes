@@ -74,14 +74,17 @@ form {
   text-align: right;
 }
 
-input {
-  padding: 4px;
-  font-size: 1em;
-  font-family: "Quicksand", sans-serif;
+input,
+button {
   display: inline-block;
   border: none;
+  padding: 4px;
+  color: black;
+  font-size: 1em;
+  font-family: "Quicksand", sans-serif;
 }
 
+button[type="submit"],
 input[type="submit"] {
   background-color: #dab655;
   color: #141d1f;
@@ -97,6 +100,7 @@ input[type="radio"] {
   margin-right: 0.5em;
 }
 
+button[type="submit"]:hover,
 input[type="submit"]:hover {
   cursor: pointer;
   background-color: #f0c85e;
