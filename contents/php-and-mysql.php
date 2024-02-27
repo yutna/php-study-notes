@@ -143,6 +143,11 @@ $php_and_mysql_data = [
                     'validate-form-using-filters.php',
                 ],
             ],
+            [
+                'title' => 'Chapter 7: Images and Files',
+                'folder_name' => 'c07',
+                'pages' => [],
+            ],
         ],
     ],
 ];
