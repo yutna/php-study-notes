@@ -149,6 +149,7 @@ $php_and_mysql_data = [
                 'pages' => [
                     'upload-file.php',
                     'move-file.php',
+                    'validate-file.php',
                 ],
             ],
         ],
