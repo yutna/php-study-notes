@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<?= get_php_and_mysql_contents() ?>
+    <?= get_php_and_mysql_contents() ?>
 </body>
 
 </html>

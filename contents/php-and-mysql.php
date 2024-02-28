@@ -146,7 +146,10 @@ $php_and_mysql_data = [
             [
                 'title' => 'Chapter 7: Images and Files',
                 'folder_name' => 'c07',
-                'pages' => [],
+                'pages' => [
+                    'upload-file.php',
+                    'move-file.php',
+                ],
             ],
         ],
     ],
