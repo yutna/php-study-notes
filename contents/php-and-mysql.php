@@ -155,6 +155,11 @@ $php_and_mysql_data = [
                     'crop-im.php',
                 ],
             ],
+            [
+                'title' => 'Chapter 8: Dates and Times',
+                'folder_name' => 'c08',
+                'pages' => [],
+            ],
         ],
     ],
 ];
