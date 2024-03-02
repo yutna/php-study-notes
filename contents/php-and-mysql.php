@@ -163,6 +163,8 @@ $php_and_mysql_data = [
                     'datetime-object.php',
                     'datetime-object-set-date-and-time.php',
                     'dateinterval-object.php',
+                    'dateperiod-object.php',
+                    'datetimezone-object.php',
                 ],
             ],
         ],
