@@ -170,7 +170,10 @@ $php_and_mysql_data = [
             [
                 'title' => 'Chapter 9: Cookies and Sessions',
                 'folder_name' => 'c09',
-                'pages' => [],
+                'pages' => [
+                    'cookies.php',
+                    'cookie-preferences.php',
+                ],
             ],
         ],
     ],
