@@ -158,7 +158,12 @@ $php_and_mysql_data = [
             [
                 'title' => 'Chapter 8: Dates and Times',
                 'folder_name' => 'c08',
-                'pages' => [],
+                'pages' => [
+                    'date-functions.php',
+                    'datetime-object.php',
+                    'datetime-object-set-date-and-time.php',
+                    'dateinterval-object.php',
+                ],
             ],
         ],
     ],
