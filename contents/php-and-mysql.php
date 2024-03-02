@@ -173,6 +173,8 @@ $php_and_mysql_data = [
                 'pages' => [
                     'cookies.php',
                     'cookie-preferences.php',
+                    'sessions.php',
+                    'home.php',
                 ],
             ],
         ],
