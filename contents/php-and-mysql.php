@@ -177,6 +177,11 @@ $php_and_mysql_data = [
                     'home.php',
                 ],
             ],
+            [
+                'title' => 'Chapter 10: Error Handling',
+                'folder_name' => 'c10',
+                'pages' => [],
+            ],
         ],
     ],
 ];
