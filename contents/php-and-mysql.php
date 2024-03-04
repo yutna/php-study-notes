@@ -180,7 +180,23 @@ $php_and_mysql_data = [
             [
                 'title' => 'Chapter 10: Error Handling',
                 'folder_name' => 'c10',
-                'pages' => [],
+                'pages' => [
+                    'development/find-error-log.php',
+                    'development/sample-error.php',
+                    'development/parse-error-1.php',
+                    'development/parse-error-2.php',
+                    'development/parse-error-3.php',
+                    'development/parse-error-4.php',
+                    'development/fatal-error-1.php',
+                    'development/fatal-error-2.php',
+                    'development/fatal-error-3.php',
+                    'development/fatal-error-4.php',
+                    'development/warning-1.php',
+                    'development/warning-2.php',
+                    'development/warning-3.php',
+                    'development/warning-4.php',
+                    'development/tracking-down-errors.php',
+                ],
             ],
         ],
     ],
@@ -190,8 +206,9 @@ function format_php_and_mysql_dashed_case_to_sentence(string $dashed_case): stri
 {
     $removed_extension = str_replace(['.php'], '', $dashed_case);
     $removed_dashed = str_replace(['-'], ' ', $removed_extension);
+    $added_space_between_forward_slash = str_replace(['/'], ' / ', $removed_dashed);
 
-    return ucwords($removed_dashed);
+    return ucwords($added_space_between_forward_slash);
 }
 
 function get_php_and_mysql_heading(string $heading_string): string
