@@ -199,6 +199,7 @@ $php_and_mysql_data = [
                     'live/error-handling-function.php',
                     'live/try-catch.php',
                     'live/throwing-exceptions.php',
+                    'live/example.php',
                 ],
             ],
         ],
