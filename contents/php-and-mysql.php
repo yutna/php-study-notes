@@ -203,6 +203,7 @@ $php_and_mysql_data = [
                 ],
             ],
         ],
+        'section-c' => [],
     ],
 ];
 
