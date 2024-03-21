@@ -203,7 +203,21 @@ $php_and_mysql_data = [
                 ],
             ],
         ],
-        'section-c' => [],
+        'section-c' => [
+            [
+                'title' => 'Chapter 12: Get and Show Data From Database',
+                'folder_name' => 'c12',
+                'pages' => [
+                    'examples/query-one-row.php',
+                    'examples/checking-for-data.php',
+                    'examples/query-multiple-rows.php',
+                    'examples/query-multiple-rows-while-loop.php',
+                    'examples/prepared-statement.php',
+                    'examples/bind-value.php',
+                    'examples/query-strings.php',
+                ],
+            ]
+        ],
     ],
 ];
 
