@@ -6,7 +6,7 @@ function format_date(string $string): string
     return date('F d, Y', $date);
 }
 
-function html_escape(string $text): string
+function html_escape(string | null $text): string
 {
     $text = $text ?? '';
     return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', false);

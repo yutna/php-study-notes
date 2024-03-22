@@ -22,7 +22,7 @@
                 </a>
             </div>
             <nav role="navigation">
-                <button id="toggle-navigation" aria-expanded="false">
+                <button type="button" id="toggle-navigation" aria-expanded="false">
                     <span class="icon-menu"></span>
                     <span class="hidden">Menu</span>
                 </button>
