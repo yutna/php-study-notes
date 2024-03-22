@@ -215,6 +215,10 @@ $php_and_mysql_data = [
                     'examples/prepared-statement.php',
                     'examples/bind-value.php',
                     'examples/query-strings.php',
+                    'examples/formatting-data-in-html.php',
+                    'examples/pdo-function-no-parameters.php',
+                    'examples/pdo-function-with-parameters.php',
+                    'my_cms/index.php',
                 ],
             ]
         ],
