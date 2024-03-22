@@ -7,6 +7,7 @@ require '../my_cms/includes/functions.php';
 
 $id = 1;
 $sql = "SELECT forename, surname FROM member WHERE id = :id;";
+
 $statement = $pdo->prepare($sql);
 $statement->bindValue('id', $id, PDO::PARAM_INT);
 $statement->execute();

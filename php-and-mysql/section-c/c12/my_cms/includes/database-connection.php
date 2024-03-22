@@ -16,7 +16,6 @@ $options = [
 ];
 
 $dsn = "$type:host=$server;dbname=$db;port=$port;charset=$charset";
-$pdo = null;
 
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
