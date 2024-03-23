@@ -226,7 +226,9 @@ $php_and_mysql_data = [
             [
                 'title' => 'Chapter 13: Updating data in Database',
                 'folder_name' => 'c13',
-                'pages' => [],
+                'pages' => [
+                    'cms/admin/index.php',
+                ],
             ]
         ],
     ],

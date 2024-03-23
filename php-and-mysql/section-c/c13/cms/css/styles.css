@@ -46,7 +46,9 @@ article.summary a:hover p {
   color: #295073;
 }
 
-/* TYPE */
+/**********************/
+/* 2:   TYPOGRAPHY    */
+/**********************/
 body {
   font-family: "Inter", "Arial", sans-serif;
   font-size: 100%; /* 16px */
@@ -95,7 +97,7 @@ nav li {
 }
 
 /**********************/
-/* 2: HEADER + FOOTER */
+/* 3: HEADER + FOOTER */
 /**********************/
 header {
   background: #e9e8e6;
@@ -104,7 +106,7 @@ header {
 }
 
 header > div.container {
-  align-items: center; /* vertical */
+  align-items: center;
 }
 
 header div.logo {
@@ -264,7 +266,7 @@ footer {
 }
 
 /**********************/
-/*   3: LAYOUT    */
+/* 4:    LAYOUT       */
 /**********************/
 
 .container {
@@ -291,7 +293,7 @@ footer {
 
 @media (min-width: 860px) {
   main.article,
-  admin.article {
+  .admin-article {
     display: grid;
     grid-gap: 2em;
     grid-template-columns: calc(66.666% - 2em) 33.333%;
@@ -418,12 +420,12 @@ textarea {
 }
 
 .btn-danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #a62d2d;
+  border-color: #a62d2d;
 }
 .btn-danger:hover {
-  background-color: #c82333;
-  border-color: #bd2130;
+  background-color: #f23838;
+  border-color: #f23838;
 }
 
 .form-control {
@@ -479,7 +481,7 @@ input[type="submit"]:hover {
 }
 
 .errors {
-  color: #ae2000;
+  color: #a62d2d;
   font-weight: bold;
 }
 
@@ -590,7 +592,80 @@ nav.pagination {
 }
 
 /**********************/
-/*  5: ICONS      */
+/* 6: ADMIN           */
+/**********************/
+.admin h1 {
+  margin-bottom: 1em;
+}
+
+table {
+  width: 100%;
+  margin-top: 2rem;
+  table-layout: fixed;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+table.admin,
+table.categories {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+th {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: normal;
+  border-bottom: 1px solid #d6d6d6;
+  padding: 0.75rem;
+  vertical-align: top;
+}
+
+td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+td img {
+  max-width: 200px;
+}
+
+p.alt {
+  margin-top: 0.5em;
+}
+
+@media (min-width: 860px) {
+  th.edit,
+  th.view {
+    width: 5em;
+  }
+  th.create,
+  th.del,
+  th.pub {
+    width: 7em;
+  }
+  th.created {
+    width: 9em;
+  }
+}
+
+.image-placeholder {
+  background-color: #d6d6d6;
+  background-image: url(../uploads/blank.png);
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 23.5em;
+  text-align: center;
+  padding: 1em;
+  color: #333;
+}
+
+/**********************/
+/* 7: ICONS           */
 /**********************/
 
 @font-face {
@@ -639,4 +714,34 @@ nav.pagination {
 }
 .icon-heart-empty:before {
   content: "\e802";
+}
+
+/* Same styles as .btn
+   Repeated here as adding them to existing .btn class
+   can prevent rules for button being processed. */
+input[type="file"]::-webkit-file-upload-button {
+  color: #fff;
+  background: #295073;
+  display: inline-block;
+  width: min-content;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  line-height: 1.5;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+input[type="file"]::file-selector-button {
+  color: #fff;
+  background: #295073;
+  display: inline-block;
+  width: min-content;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  line-height: 1.5;
+  vertical-align: middle;
+  text-transform: uppercase;
 }
