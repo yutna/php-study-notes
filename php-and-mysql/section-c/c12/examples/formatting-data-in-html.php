@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require '../my_cms/includes/database-connection.php';
-require '../my_cms/includes/functions.php';
+require '../cms/includes/database-connection.php';
+require '../cms/includes/functions.php';
 
 $sql = "SELECT id, forename, surname, joined, picture FROM member";
 $statement = $pdo->query($sql);
@@ -23,7 +23,7 @@ $members = $statement->fetchAll();
 <body>
     <?php foreach ($members as $member) { ?>
         <div class="member-summary">
-            <img alt="<?= html_escape($member['forename']) ?>" class="profile" src="../my_cms/uploads/<?= html_escape($member['picture'] ?? 'blank-member.png') ?>">
+            <img alt="<?= html_escape($member['forename']) ?>" class="profile" src="../cms/uploads/<?= html_escape($member['picture'] ?? 'blank-member.png') ?>">
             <h2><?= html_escape($member['forename'] . ' ' . $member['surname']) ?></h2>
             <p>
                 Member since:

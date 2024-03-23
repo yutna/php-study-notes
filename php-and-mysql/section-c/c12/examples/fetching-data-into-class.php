@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 require '../cms/includes/database-connection.php';
 require '../cms/includes/functions.php';
+require 'classes/Member.php';
 
-$sql = "SELECT forename, surname FROM member;";
+$sql = "SELECT forename, surname FROM member WHERE id = 1;";
 $statement = $pdo->query($sql);
-$members = $statement->fetchAll();
+$statement->setFetchMode(PDO::FETCH_CLASS, 'Member');
+$member = $statement->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -16,16 +18,11 @@ $members = $statement->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Query Multiple Rows</title>
+    <title>Fetching data into class</title>
 </head>
 
 <body>
-    <?php foreach ($members as $member) { ?>
-        <p>
-            <?= html_escape($member['forename']) ?>
-            <?= html_escape($member['surname']) ?>
-        </p>
-    <? } ?>
+    <p><?= html_escape($member->getFullName()) ?></p>
 </body>
 
 </html>

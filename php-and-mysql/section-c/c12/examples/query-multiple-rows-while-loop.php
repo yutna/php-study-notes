@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require '../my_cms/includes/database-connection.php';
-require '../my_cms/includes/functions.php';
+require '../cms/includes/database-connection.php';
+require '../cms/includes/functions.php';
 
 $sql = "SELECT forename, surname FROM member;";
 $statement = $pdo->query($sql);

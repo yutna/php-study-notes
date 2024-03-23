@@ -218,7 +218,9 @@ $php_and_mysql_data = [
                     'examples/formatting-data-in-html.php',
                     'examples/pdo-function-no-parameters.php',
                     'examples/pdo-function-with-parameters.php',
-                    'my_cms/index.php',
+                    'examples/fetching-data-as-objects.php',
+                    'examples/fetching-data-into-class.php',
+                    'cms/index.php',
                 ],
             ]
         ],
