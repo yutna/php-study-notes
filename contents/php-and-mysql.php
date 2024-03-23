@@ -222,6 +222,11 @@ $php_and_mysql_data = [
                     'examples/fetching-data-into-class.php',
                     'cms/index.php',
                 ],
+            ],
+            [
+                'title' => 'Chapter 13: Updating data in Database',
+                'folder_name' => 'c13',
+                'pages' => [],
             ]
         ],
     ],
