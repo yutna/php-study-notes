@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         pdo($pdo, $sql, [$id]);
         redirect('categories.php', ['success' => 'Category deleted']);
     } catch (PDOException $e) {
-        if ($e->errorInfo[1] === 1451) {
+        if (($e->errorInfo[1] === 1217) || ($e->errorInfo[1] === 1451)) {
             redirect('categories.php', ['failure' => 'Category contains articles that must be moved or deleted before you can delete it']);
         } else {
             throw $e;
