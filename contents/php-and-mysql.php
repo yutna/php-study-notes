@@ -231,6 +231,15 @@ $php_and_mysql_data = [
                 ],
             ]
         ],
+        'section-d' => [
+            [
+                'title' => 'Intro',
+                'folder_name' => 'intro',
+                'pages' => [
+                    'by-reference.php',
+                ],
+            ]
+        ],
     ],
 ];
 
