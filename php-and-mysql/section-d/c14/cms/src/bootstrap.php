@@ -13,3 +13,9 @@ if (DEV === false) {
     set_exception_handler('handle_exception');
     register_shutdown_function('handle_shutdown');
 }
+
+// Set autoload for classes
+spl_autoload_register(function ($class) {
+    $path = APP_ROOT . '/src/classes/';
+    require $path . $class . '.php';
+});
