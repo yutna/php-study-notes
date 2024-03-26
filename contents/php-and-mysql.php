@@ -243,8 +243,7 @@ $php_and_mysql_data = [
                 'title' => 'Chapter 14: Refactoring and Dependency Injection',
                 'folder_name' => 'c14',
                 'pages' => [
-                    'cms/public/index.php',
-                    'cms/src/bootstrap.php',
+                    'cms/index.php',
                 ],
             ]
         ],
