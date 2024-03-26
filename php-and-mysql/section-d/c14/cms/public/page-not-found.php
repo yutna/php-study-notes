@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 http_response_code(404);
 
+require '../src/bootstrap.php';
 require_once 'includes/database-connection.php';
-require_once 'includes/functions.php';
 
 $sql = "SELECT id, name FROM category WHERE navigation = 1;";
 $navigation = pdo($pdo, $sql)->fetchAll();

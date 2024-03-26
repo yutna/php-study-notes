@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/functions.php';
 
 $success = $_GET['success'] ?? null;
 $failure = $_GET['failure'] ?? null;

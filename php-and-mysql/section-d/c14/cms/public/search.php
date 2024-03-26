@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+require '../src/bootstrap.php';
 require 'includes/database-connection.php';
-require 'includes/functions.php';
 
 $term = filter_input(INPUT_GET, 'term');
 $show = filter_input(INPUT_GET, 'show', FILTER_VALIDATE_INT) ?? 3;

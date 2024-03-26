@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/functions.php';
 
 $sql = "SELECT count(id) FROM article";
 $article_count = pdo($pdo, $sql)->fetchColumn();

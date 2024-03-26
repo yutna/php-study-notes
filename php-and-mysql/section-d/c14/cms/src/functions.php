@@ -28,6 +28,7 @@ function html_escape(string | null $text): string
     return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', false);
 }
 
+// TODO: remove this
 function pdo(PDO $pdo, string $sql, array $arguments = null): PDOStatement
 {
     if (!$arguments) {
@@ -49,13 +50,11 @@ function redirect(string $location, array $parameters = [], $response_code = 302
     exit;
 }
 
-set_error_handler('handle_error');
 function handle_error($error_type, $error_message, $error_file, $error_line)
 {
     throw new ErrorException($error_message, 0, $error_type, $error_file, $error_line);
 }
 
-set_exception_handler('handle_exception');
 function handle_exception($e)
 {
     error_log($e);
@@ -64,7 +63,6 @@ function handle_exception($e)
           <p>The site's owners have been informed, Please try again later.</p>";
 }
 
-register_shutdown_function('handle_shutdown');
 function handle_shutdown()
 {
     $error = error_get_last();

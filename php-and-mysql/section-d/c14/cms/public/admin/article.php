@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/functions.php';
 require '../includes/validate.php';
 
 $uploads = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;

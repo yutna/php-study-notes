@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/functions.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $image = [];

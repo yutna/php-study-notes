@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+require '../src/bootstrap.php';
 require 'includes/database-connection.php';
-require 'includes/functions.php';
 
 $article_query = "SELECT a.id, a.title, a.summary, a.category_id, a.member_id,
                   c.name AS category,
