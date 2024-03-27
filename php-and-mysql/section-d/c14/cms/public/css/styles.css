@@ -21,6 +21,7 @@ Red   f23838
 * {
   box-sizing: border-box;
 }
+
 .hidden {
   display: none;
 }
@@ -413,6 +414,7 @@ textarea {
   background: #e1e0de;
   border-color: #e9e8e6;
 }
+
 .btn-secondary:hover {
   color: #fff;
   background: #717170;
@@ -423,6 +425,7 @@ textarea {
   background-color: #a62d2d;
   border-color: #a62d2d;
 }
+
 .btn-danger:hover {
   background-color: #f23838;
   border-color: #f23838;
@@ -498,6 +501,7 @@ input[type="submit"]:hover {
 textarea#summary {
   min-height: 4rem;
 }
+
 textarea#content {
   min-height: 12rem;
 }
@@ -641,11 +645,13 @@ p.alt {
   th.view {
     width: 5em;
   }
+
   th.create,
   th.del,
   th.pub {
     width: 7em;
   }
+
   th.created {
     width: 9em;
   }
@@ -700,18 +706,23 @@ p.alt {
 .icon-menu:before {
   content: "\f0c9";
 }
+
 .icon-search:before {
   content: "\e803";
 }
+
 .icon-comment:before {
   content: "\e800";
 }
+
 .icon-comment-empty:before {
   content: "\f0e5";
 }
+
 .icon-heart:before {
   content: "\e801";
 }
+
 .icon-heart-empty:before {
   content: "\e802";
 }
@@ -732,6 +743,7 @@ input[type="file"]::-webkit-file-upload-button {
   vertical-align: middle;
   text-transform: uppercase;
 }
+
 input[type="file"]::file-selector-button {
   color: #fff;
   background: #295073;
