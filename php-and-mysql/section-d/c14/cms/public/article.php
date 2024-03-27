@@ -3,39 +3,27 @@
 declare(strict_types=1);
 
 require '../src/bootstrap.php';
-require 'includes/database-connection.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
-    include 'page-not-found.php';
+    include APP_ROOT . '/public/page-not-found.php';
 }
 
-$article_query = "SELECT a.title, a.summary, a.content, a.created, a.category_id, a.member_id,
-                         c.name AS category,
-                         CONCAT(m.forename, ' ', m.surname) AS author,
-                         i.file AS image_file,
-                         i.alt AS image_alt
-                  FROM article AS a
-                  JOIN category AS c ON a.category_id = c.id
-                  JOIN member AS m ON a.member_id = m.id
-                  LEFT JOIN image AS i ON a.image_id = i.id
-                  WHERE a.id = :id AND a.published = 1;";
-$article = pdo($pdo, $article_query, ['id' => $id])->fetch();
+$article = $cms->getArticle()->get($id);
 
 if (!$article) {
-    include 'page-not-found.php';
+    include APP_ROOT . '/public/page-not-found.php';
 }
 
-$navigation_query = "SELECT id, name FROM category WHERE navigation = 1;";
-$navigation = pdo($pdo, $navigation_query)->fetchAll();
+$navigation = $cms->getCategory()->getAll();
 
 $section = $article['category_id'];
 $title = $article['title'];
 $description = $article['summary'];
 ?>
 
-<?php include 'includes/header.php'; ?>
+<?php include APP_ROOT . '/public/includes/header.php'; ?>
 
 <main class="article container">
     <section class="image">
@@ -58,4 +46,4 @@ $description = $article['summary'];
     </section>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/footer.php'; ?>

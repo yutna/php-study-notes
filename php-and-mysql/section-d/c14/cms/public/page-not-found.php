@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 http_response_code(404);
 
-require '../src/bootstrap.php';
-require_once 'includes/database-connection.php';
+require_once '../src/bootstrap.php';
 
-$sql = "SELECT id, name FROM category WHERE navigation = 1;";
-$navigation = pdo($pdo, $sql)->fetchAll();
+$navigation = $cms->getCategory()->getAll();
 
 $section = '';
 $title = 'Page not found';
 $description = '';
 ?>
 
-<?php require_once 'includes/header.php'; ?>
+<?php require APP_ROOT . '/public/includes/header.php'; ?>
 
 <main class="container" id="content">
     <h1>Sorry! We cannot find that page.</h1>
@@ -25,5 +23,5 @@ $description = '';
     </p>
 </main>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require APP_ROOT . '/public/includes/footer.php'; ?>
 <?php exit; ?>

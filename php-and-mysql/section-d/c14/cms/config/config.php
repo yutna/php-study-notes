@@ -20,6 +20,6 @@ define('DEV', true);
 
 // File upload settings
 define('FILE_EXTENSIONS', ['jpeg', 'jpg', 'png', 'gif']);
-define('MAX_SIZES', '5242880');
+define('MAX_SIZES', 5242880);
 define('MEDIA_TYPES', ['image/jpeg', 'image/png', 'image/gif']);
 define('UPLOADS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR);

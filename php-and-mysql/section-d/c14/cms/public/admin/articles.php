@@ -3,22 +3,14 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
 
 $success = $_GET['success'] ?? null;
 $failure = $_GET['failure'] ?? null;
 
-$sql = "SELECT a.id, a.title, a.created, a.published,
-               i.file AS image_file,
-               i.alt AS image_alt
-        FROM article AS a
-        LEFT JOIN image AS i ON a.image_id = i.id
-        ORDER BY a.id DESC;";
-
-$articles = pdo($pdo, $sql)->fetchAll();
+$articles = $cms->getArticle()->getAll(false);
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container" id="content">
     <section class="header">
@@ -77,4 +69,4 @@ $articles = pdo($pdo, $sql)->fetchAll();
     </table>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

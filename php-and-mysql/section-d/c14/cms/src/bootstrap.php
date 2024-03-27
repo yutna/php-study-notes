@@ -19,3 +19,7 @@ spl_autoload_register(function ($class) {
     $path = APP_ROOT . '/src/classes/';
     require $path . $class . '.php';
 });
+
+// Initialize cms instance
+$cms = new CMS($dsn, $username, $password);
+unset($dsn, $username, $password);

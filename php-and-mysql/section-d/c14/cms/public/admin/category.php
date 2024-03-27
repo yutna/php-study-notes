@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$saved = false;
 
 $category = [
     'id' => $id,
@@ -22,8 +22,7 @@ $errors = [
 
 // If there was an id, page is editing the category, so get current category
 if ($id) {
-    $sql = "SELECT id, name, description, navigation FROM category WHERE id = :id;";
-    $category = pdo($pdo, $sql, [$id])->fetch();
+    $category = $cms->getCategory()->get($id);
 
     if (!$category) {
         redirect('categories.php', ['failure' => 'Category not found']);
@@ -46,36 +45,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arguments = $category;
 
         if ($id) {
-            $sql = "UPDATE category
-                    SET name = :name,
-                        description = :description,
-                        navigation = :navigation
-                    WHERE id = :id;";
+            $saved = $cms->getCategory()->update($arguments);
         } else {
             unset($arguments['id']);
-            $sql = "INSERT INTO category (name, description, navigation)
-                    VALUES (:name, :description, :navigation);";
+            $saved = $cms->getCategory()->create($arguments);
         }
 
-        try {
-            pdo($pdo, $sql, $arguments);
+        if ($saved) {
             redirect('categories.php', ['success' => 'Category saved']);
-        } catch (PDOException $e) {
-            if ($e->errorInfo[1] === 1062) {
-                $errors['warning'] = 'Category name already in use';
-            } else {
-                throw $e;
-            }
+        } else {
+            $errors['warning'] = 'Category name already in use';
         }
     }
 }
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container admin" id="content">
     <form action="category.php?id=<?= $id ?>" class="narrow" method="POST">
         <h2>Edit Category</h2>
+
         <?php if ($errors['warning']) { ?>
             <div class="alert alert-danger">
                 <?= $errors['warning'] ?>
@@ -103,4 +93,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

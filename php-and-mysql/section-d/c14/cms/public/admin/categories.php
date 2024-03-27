@@ -3,16 +3,14 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
 
 $success = $_GET['success'] ?? null;
 $failure = $_GET['failure'] ?? null;
 
-$sql = "SELECT id, name, navigation FROM category;";
-$categories = pdo($pdo, $sql)->fetchAll();
+$categories = $cms->getCategory()->getAll();
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container" id="content">
     <section class="header">
@@ -63,4 +61,4 @@ $categories = pdo($pdo, $sql)->fetchAll();
     </table>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

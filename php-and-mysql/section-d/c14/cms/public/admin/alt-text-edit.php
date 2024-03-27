@@ -3,53 +3,39 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-$image = [
-    'file' => '',
-    'alt' => '',
-];
-
+$article = [];
 $errors = [
     'warning' => '',
     'alt' => '',
 ];
 
-if ($id) {
-    $sql = "SELECT i.id, i.file, i.alt
-            FROM image AS i
-            JOIN article AS a ON i.id = a.image_id
-            WHERE a.id = :id";
-
-    $image = pdo($pdo, $sql, [$id])->fetch();
+if (!$id) {
+    redirect('articles.php', ['failure' => 'Article not found']);
 }
 
-if (!$image) {
+$article = $cms->getArticle()->get($id, false);
+
+if (!$article['image_file']) {
     redirect('article.php', ['id' => $id]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $image['alt'] = $_POST['image_alt'];
-    $errors['alt'] = Validate::isText($image['alt'], 1, 254) ? '' : 'Alt text for image should be 1-254 characters.';
+    $article['image_alt'] = $_POST['image_alt'];
+    $errors['alt'] = Validate::isText($article['image_alt'], 1, 254) ? '' : 'Alt text for image should be 1-254 characters.';
 
     if ($errors['alt']) {
         $errors['warning'] = 'Please correct error below';
     } else {
-        unset($image['file']);
-
-        $sql = "UPDATE image
-                SET alt = :alt
-                WHERE id = :id";
-
-        pdo($pdo, $sql, $image);
+        $cms->getArticle()->altUpdate($article['image_id'], $article['image_alt']);
         redirect('article.php', ['id' => $id]);
     }
 }
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container admin" id="content">
     <form action="alt-text-edit.php?id=<?= $id ?>" method="POST" class="narrow">
@@ -63,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-group">
             <label for="image_alt">Alt text: </label>
-            <input type="text" class="form-control" name="image_alt" id="image_alt" value="<?= html_escape($image['alt']) ?>">
+            <input type="text" class="form-control" name="image_alt" id="image_alt" value="<?= html_escape($article['image_alt']) ?>">
             <div class="errors"><?= $errors['alt'] ?></div>
         </div>
 
@@ -71,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="submit" class="btn btn-primary btn-save" name="delete" value="Confirm">
         </div>
 
-        <img src="../uploads/<?= $image['file'] ?>" alt="<?= html_escape($image['alt']) ?>">
+        <img src="../uploads/<?= $article['image_file'] ?>" alt="<?= html_escape($article['image_alt']) ?>">
     </form>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

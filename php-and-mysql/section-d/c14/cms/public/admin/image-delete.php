@@ -3,51 +3,33 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$image = [];
 
-if ($id) {
-    $sql = "SELECT i.id, i.file, i.alt
-            FROM image AS i
-            JOIN article AS a ON i.id = a.image_id
-            WHERE a.id = :id;";
-
-    $image = pdo($pdo, $sql, [$id])->fetch();
+if (!$id) {
+    redirect('articles.php', ['failure' => 'Article not found']);
 }
 
-if (!$image) {
+$article = $cms->getArticle()->get($id, false);
+
+if (!$article['image_file']) {
     redirect('article.php', ['id' => $id]);
 }
 
-$path = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $image['file'];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sql = "UPDATE article
-            SET image_id = null
-            WHERE id = :id";
-    pdo($pdo, $sql, [$id]);
-
-    $sql = "DELETE FROM image
-            WHERE id = :id";
-    pdo($pdo, $sql, [$image['id']]);
-
-    if (file_exists($path)) {
-        unlink($path);
-    }
-
+    $path = UPLOADS . $article['image_file'];
+    $cms->getArticle()->imageDelete($article['image_id'], $path, $id);
     redirect('article.php', ['id' => $id]);
 }
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container admin" id="content">
     <form action="image-delete.php?id=<?= $id ?>" method="POST" class="narrow">
         <h1>Delete Image</h1>
         <p>
-            <img src="../uploads/<?= html_escape($image['file']) ?>" alt="<?= html_escape($image['alt']) ?>">
+            <img src="../uploads/<?= html_escape($article['image_file']) ?>" alt="<?= html_escape($article['image_alt']) ?>">
         </p>
         <p>Click confirm to delete the image:</p>
         <input type="submit" class="btn btn-primary" name="delete" value="Confirm">
@@ -55,4 +37,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

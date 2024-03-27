@@ -3,43 +3,28 @@
 declare(strict_types=1);
 
 require '../src/bootstrap.php';
-require 'includes/database-connection.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
-    include 'page-not-found.php';
+    include APP_ROOT . '/public/page-not-found.php';
 }
 
-$category_query = "SELECT id, name, description FROM category WHERE id = :id";
-$category = pdo($pdo, $category_query, ['id' => $id])->fetch();
+$category = $cms->getCategory()->get($id);
 
 if (!$category) {
-    include 'page-not-found.php';
+    include  APP_ROOT . '/public/page-not-found.php';
 }
 
-$article_query = "SELECT a.id, a.title, a.summary, a.category_id, a.member_id,
-                         c.name AS category,
-                         CONCAT(m.forename, ' ', m.surname) AS author,
-                         i.file AS image_file,
-                         i.alt AS image_alt
-                  FROM article AS a
-                  JOIN category AS c ON a.category_id = c.id
-                  JOIN member AS m ON a.member_id = m.id
-                  LEFT JOIN image AS i ON a.image_id = i.id
-                  WHERE a.category_id = :id AND a.published = 1
-                  ORDER BY a.id DESC;";
-$articles = pdo($pdo, $article_query, ['id' => $id])->fetchALl();
-
-$navigation_query = "SELECT id, name FROM category WHERE navigation = 1;";
-$navigation = pdo($pdo, $navigation_query)->fetchAll();
+$articles = $cms->getArticle()->getAll(true, $id);
+$navigation = $cms->getCategory()->getAll();
 
 $section = $category['id'];
 $title = $category['name'];
 $description = $category['description'];
 ?>
 
-<?php include 'includes/header.php'; ?>
+<?php include APP_ROOT . '/public/includes/header.php'; ?>
 
 <main class="container" id="content">
     <section class="header">
@@ -69,4 +54,4 @@ $description = $category['description'];
     </section>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/footer.php'; ?>

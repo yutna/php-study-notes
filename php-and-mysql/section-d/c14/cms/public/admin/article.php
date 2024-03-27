@@ -3,16 +3,11 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
-
-$uploads = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
-$file_types = ['image/jpeg', 'image/png', 'image/gif'];
-$file_exts = ['jpg', 'jpeg', 'png', 'gif'];
-$max_size = 5_242_880;
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $temp = $_FILES['image']['tmp_name'] ?? '';
 $destination = '';
+$saved = null;
 
 $article = [
     'id' => $id,
@@ -39,14 +34,7 @@ $errors = [
 ];
 
 if ($id) {
-    $sql = "SELECT a.id, a.title, a.summary, a.content, a.category_id, a.member_id, a.image_id, a.published,
-                   i.file AS image_file,
-                   i.alt AS image_alt
-            FROM article AS a
-            LEFT JOIN image AS i ON a.image_id = i.id
-            WHERE a.id = :id;";
-
-    $article = pdo($pdo, $sql, [$id])->fetch();
+    $article = $cms->getArticle()->get($id, false);
 
     if (!$article) {
         redirect('articles.php', ['failure' => 'Article not found']);
@@ -54,12 +42,8 @@ if ($id) {
 }
 
 $saved_image = $article['image_file'] ? true : false;
-
-$sql = "SELECT id, forename, surname FROM member;";
-$authors = pdo($pdo, $sql)->fetchAll();
-
-$sql = "SELECT id, name FROM category;";
-$categories = pdo($pdo, $sql)->fetchAll();
+$authors = $cms->getMember()->getAll();
+$categories = $cms->getCategory()->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['image'])) {
@@ -70,15 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $article['image_alt'] = $_POST['image_alt'];
         $ext = mb_strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
 
-        $errors['image_file'] .= in_array(mime_content_type($temp), $file_types) ? '' : 'Wrong file type. ';
-        $errors['image_file'] .= in_array($ext, $file_exts) ? '' : 'Wrong file extension. ';
-        $errors['image_file'] .= $_FILES['image']['size'] <= $max_size ? '' : 'File too big. ';
+        $errors['image_file'] .= in_array(mime_content_type($temp), MEDIA_TYPES) ? '' : 'Wrong file type. ';
+        $errors['image_file'] .= in_array($ext, FILE_EXTENSIONS) ? '' : 'Wrong file extension. ';
+        $errors['image_file'] .= $_FILES['image']['size'] <= MAX_SIZES ? '' : 'File too big. ';
 
         $errors['image_alt'] = Validate::isText($article['image_alt'], 1, 254) ? '' : 'Alt text must be 1-254 characters.';
 
         if (($errors['image_file'] == '') && ($errors['image_alt'] == '')) {
-            $article['image_file'] = create_filename($_FILES['image']['name'], $uploads);
-            $destination = $uploads . $article['image_file'];
+            $article['image_file'] = create_filename($_FILES['image']['name'], UPLOADS);
+            $destination = UPLOADS . $article['image_file'];
         }
     }
 
@@ -102,55 +86,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $arguments = $article;
 
-        try {
-            $pdo->beginTransaction();
+        if ($id) {
+            $saved = $cms->getArticle()->update($arguments, $temp, $destination);
+        } else {
+            unset($arguments['id']);
+            $saved = $cms->getArticle()->create($arguments, $temp, $destination);
+        }
 
-            if ($destination) {
-                $imagick = new Imagick($temp);
-                $imagick->cropThumbnailImage(1200, 700);
-                $imagick->writeImage($destination);
-
-                $sql = "INSERT INTO image (file, alt)
-                        VALUES (:file, :alt);";
-
-                pdo($pdo, $sql, [$arguments['image_file'], $arguments['image_alt'],]);
-                $arguments['image_id'] = $pdo->lastInsertId();
-            }
-
-            unset($arguments['image_file'], $arguments['image_alt']);
-
-            if ($id) {
-                $sql = "UPDATE article
-                        SET title = :title,
-                            summary = :summary,
-                            content = :content,
-                            category_id = :category_id,
-                            member_id = :member_id,
-                            image_id = :image_id,
-                            published = :published
-                        WHERE id = :id;";
-            } else {
-                unset($arguments['id']);
-                $sql = "INSERT INTO article (title, summary, content, category_id, member_id, image_id, published)
-                        VALUES (:title, :summary, :content, :category_id, :member_id, :image_id, :published);";
-            }
-
-            pdo($pdo, $sql, $arguments);
-            $pdo->commit();
-
+        if ($saved) {
             redirect('articles.php', ['success' => 'Article saved']);
-        } catch (PDOException $e) {
-            $pdo->rollBack();
-
-            if (file_exists($destination)) {
-                unlink($destination);
-            }
-
-            if (($e instanceof PDOException) && ($e->errorInfo[1] === 1062)) {
-                $errors['warning'] = 'Article title already used';
-            } else {
-                throw $e;
-            }
+        } else {
+            $errors['warning'] = 'Article title already in use';
         }
     }
 
@@ -158,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include  APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <form action="article.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
     <main class="container admin" id="content">
@@ -244,4 +190,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 </form>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

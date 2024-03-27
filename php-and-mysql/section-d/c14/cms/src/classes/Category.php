@@ -81,7 +81,7 @@ class Category
             return true;
         } catch (PDOException $e) {
             // Integrity constraint error
-            if ($e->errorInfo[1] === 1451) {
+            if (($e->errorInfo[1] === 1217) || ($e->errorInfo[1] === 1451)) {
                 return false;
             } else {
                 throw $e;

@@ -3,46 +3,42 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
+
+$deleted = null;
+$category = '';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$category = '';
 
 if (!$id) {
     redirect('categories.php', ['failure' => 'Category not found']);
 }
 
-$sql = "SELECT name FROM category WHERE id = :id;";
-$category = pdo($pdo, $sql, [$id])->fetchColumn();
+$category = $cms->getCategory()->get($id);
 
 if (!$category) {
     redirect('categories.php', ['failure' => 'Category not found']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $sql = "DELETE FROM category WHERE id = :id;";
-        pdo($pdo, $sql, [$id]);
+    $deleted = $cms->getCategory()->delete($id);
+
+    if ($deleted) {
         redirect('categories.php', ['success' => 'Category deleted']);
-    } catch (PDOException $e) {
-        if (($e->errorInfo[1] === 1217) || ($e->errorInfo[1] === 1451)) {
-            redirect('categories.php', ['failure' => 'Category contains articles that must be moved or deleted before you can delete it']);
-        } else {
-            throw $e;
-        }
+    } else {
+        redirect('categories.php', ['failure' => 'Category contains articles that must be moved or deleted before you can delete the category']);
     }
 }
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container admin" id="content">
     <form action="category-delete.php?id=<?= $id ?>" class="narrow" method="POST">
         <h1>Delete Category</h1>
-        <p>Click confirm to delete the category <em><?= html_escape($category) ?></em></p>
+        <p>Click confirm to delete the category <em><?= html_escape($category['name']) ?></em></p>
         <input type="submit" name="delete" class="btn btn-primary" value="Confirm">
         <a href="categories.php" class="btn btn-danger">Cancel</a>
     </form>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>

@@ -3,16 +3,12 @@
 declare(strict_types=1);
 
 require '../../src/bootstrap.php';
-require '../includes/database-connection.php';
 
-$sql = "SELECT count(id) FROM article";
-$article_count = pdo($pdo, $sql)->fetchColumn();
-
-$sql = "SELECT count(id) FROM category";
-$category_count = pdo($pdo, $sql)->fetchColumn();
+$article_count = $cms->getArticle()->count();
+$category_count = $cms->getCategory()->count();
 ?>
 
-<?php include '../includes/admin-header.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
 
 <main class="container" id="content">
     <section class="header">
@@ -44,4 +40,4 @@ $category_count = pdo($pdo, $sql)->fetchColumn();
     </table>
 </main>
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>
