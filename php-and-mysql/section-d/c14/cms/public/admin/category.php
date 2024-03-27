@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/validate.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -36,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category['description'] = $_POST['description'];
     $category['navigation'] = isset($_POST['navigation']) && ($_POST['navigation'] == 1) ? 1 : 0;
 
-    $errors['name'] = is_text($category['name'], 1, 24) ? '' : 'Name should be 1-24 characters.';
-    $errors['description'] = is_text($category['description'], 1, 254) ? '' : 'Description should be 1-254 characters.';
+    $errors['name'] = Validate::isText($category['name'], 1, 24) ? '' : 'Name should be 1-24 characters.';
+    $errors['description'] = Validate::isText($category['description'], 1, 254) ? '' : 'Description should be 1-254 characters.';
 
     $invalid = implode($errors);
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/validate.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -33,7 +32,7 @@ if (!$image) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image['alt'] = $_POST['image_alt'];
-    $errors['alt'] = is_text($image['alt'], 1, 254) ? '' : 'Alt text for image should be 1-254 characters.';
+    $errors['alt'] = Validate::isText($image['alt'], 1, 254) ? '' : 'Alt text for image should be 1-254 characters.';
 
     if ($errors['alt']) {
         $errors['warning'] = 'Please correct error below';

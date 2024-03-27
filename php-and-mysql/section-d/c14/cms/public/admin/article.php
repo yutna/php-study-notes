@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 require '../../src/bootstrap.php';
 require '../includes/database-connection.php';
-require '../includes/validate.php';
 
 $uploads = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
 $file_types = ['image/jpeg', 'image/png', 'image/gif'];
@@ -75,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['image_file'] .= in_array($ext, $file_exts) ? '' : 'Wrong file extension. ';
         $errors['image_file'] .= $_FILES['image']['size'] <= $max_size ? '' : 'File too big. ';
 
-        $errors['image_alt'] = is_text($article['image_alt'], 1, 254) ? '' : 'Alt text must be 1-254 characters.';
+        $errors['image_alt'] = Validate::isText($article['image_alt'], 1, 254) ? '' : 'Alt text must be 1-254 characters.';
 
         if (($errors['image_file'] == '') && ($errors['image_alt'] == '')) {
             $article['image_file'] = create_filename($_FILES['image']['name'], $uploads);
@@ -90,11 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $article['category_id'] = $_POST['category_id'];
     $article['published'] = isset($_POST['publised']) && ($_POST['publised'] == 1) ? 1 : 0;
 
-    $errors['title'] = is_text($article['title'], 1, 80) ? '' : 'Title mush be 1-80 characters';
-    $errors['summary'] = is_text($article['summary'], 1, 254) ? '' : 'Summary must be 1-254 characters';
-    $errors['content'] = is_text($article['content'], 1, 100000) ? '' : 'Article must be 1-100,000 characters';
-    $errors['member'] = is_member_id($article['member_id'], $authors) ? '' : 'Please select an author';
-    $errors['category'] = is_category_id($article['category_id'], $categories) ? '' : 'Please select a category';
+    $errors['title'] = Validate::isText($article['title'], 1, 80) ? '' : 'Title mush be 1-80 characters';
+    $errors['summary'] = Validate::isText($article['summary'], 1, 254) ? '' : 'Summary must be 1-254 characters';
+    $errors['content'] = Validate::isText($article['content'], 1, 100000) ? '' : 'Article must be 1-100,000 characters';
+    $errors['member'] = Validate::isMemberId($article['member_id'], $authors) ? '' : 'Please select an author';
+    $errors['category'] = Validate::isCategoryId($article['category_id'], $categories) ? '' : 'Please select a category';
 
     $invalid = implode($errors);
 
