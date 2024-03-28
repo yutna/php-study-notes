@@ -245,7 +245,14 @@ $php_and_mysql_data = [
                 'pages' => [
                     'cms/public/index.php',
                 ],
-            ]
+            ],
+            [
+                'title' => 'Chapter 15: Namespaces and Libraries',
+                'folder_name' => 'c15',
+                'pages' => [
+                    'cms/public/index.php',
+                ],
+            ],
         ],
     ],
 ];
