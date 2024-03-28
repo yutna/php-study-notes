@@ -1,5 +1,7 @@
 <?php
 
+namespace PhpBook\Validate;
+
 class Validate
 {
     public static function isCategoryId($category_id, array $category_list): bool

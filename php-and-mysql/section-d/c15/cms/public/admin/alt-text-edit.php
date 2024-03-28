@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use PhpBook\Validate\Validate;
+
 require '../../src/bootstrap.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

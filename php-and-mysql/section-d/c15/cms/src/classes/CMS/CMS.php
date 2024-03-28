@@ -1,5 +1,7 @@
 <?php
 
+namespace PhpBook\CMS;
+
 class CMS
 {
     protected $db = null;

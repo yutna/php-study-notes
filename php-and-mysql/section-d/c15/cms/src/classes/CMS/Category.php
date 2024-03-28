@@ -1,5 +1,7 @@
 <?php
 
+namespace PhpBook\CMS;
+
 class Category
 {
     protected $db;
@@ -40,7 +42,7 @@ class Category
 
             $this->db->runSQL($sql, $category);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             // Duplicate entry error
             if ($e->errorInfo[1] === 1062) {
                 return false;
@@ -61,7 +63,7 @@ class Category
 
             $this->db->runSQL($sql, $category);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             // Duplicate entry error
             if ($e->errorInfo[1] === 1062) {
                 return false;
@@ -79,7 +81,7 @@ class Category
 
             $this->db->runSQL($sql, [$id]);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             // Integrity constraint error
             if (($e->errorInfo[1] === 1217) || ($e->errorInfo[1] === 1451)) {
                 return false;

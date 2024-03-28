@@ -15,11 +15,11 @@ if (DEV === false) {
 }
 
 // Set autoload for classes
-spl_autoload_register(function ($class) {
-    $path = APP_ROOT . '/src/classes/';
-    require $path . $class . '.php';
-});
+// spl_autoload_register(function ($class) {
+//     $path = APP_ROOT . '/src/classes/';
+//     require $path . $class . '.php';
+// });
 
 // Initialize cms instance
-$cms = new CMS($dsn, $username, $password);
+$cms = new \PhpBook\CMS\CMS($dsn, $username, $password);
 unset($dsn, $username, $password);

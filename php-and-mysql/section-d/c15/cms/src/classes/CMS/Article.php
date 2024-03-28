@@ -1,5 +1,7 @@
 <?php
 
+namespace PhpBook\CMS;
+
 class Article
 {
     protected $db;
@@ -115,7 +117,7 @@ class Article
             $this->db->beginTransaction();
 
             if ($destination) {
-                $imagick = new Imagick($temporary);
+                $imagick = new \Imagick($temporary);
                 $imagick->cropThumbnailImage(1200, 700);
                 $imagick->writeImage($destination);
 
@@ -135,7 +137,7 @@ class Article
             $this->db->commit();
 
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->db->rollBack();
 
             if (file_exists($destination)) {
@@ -143,7 +145,7 @@ class Article
             }
 
             // Integrity constraint error
-            if (($e instanceof PDOException) && ($e->errorInfo[1] === 1062)) {
+            if (($e instanceof \PDOException) && ($e->errorInfo[1] === 1062)) {
                 return false;
             } else {
                 throw $e;
@@ -157,7 +159,7 @@ class Article
             $this->db->beginTransaction();
 
             if ($destination) {
-                $imagick = new Imagick($temporary);
+                $imagick = new \Imagick($temporary);
                 $imagick->cropThumbnailImage(1200, 700);
                 $imagick->writeImage($destination);
 
@@ -184,14 +186,14 @@ class Article
             $this->db->commit();
 
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->db->rollBack();
 
             if (file_exists($destination)) {
                 unlink($destination);
             }
 
-            if (($e instanceof PDOException) && ($e->errorInfo[1] === 1062)) {
+            if (($e instanceof \PDOException) && ($e->errorInfo[1] === 1062)) {
                 return false;
             } else {
                 throw $e;
