@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "PhpBook\\": "src/classes"
+        }
+    },
+    "require": {
+        "ezyang/htmlpurifier": "^4.17",
+        "twig/twig": "^3.8",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
