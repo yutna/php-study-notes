@@ -21,20 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cms->getArticle()->imageDelete($article['image_id'], $path, $id);
     redirect('article.php', ['id' => $id]);
 }
-?>
 
-<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
+$data['id'] = $id;
+$data['article'] = $article;
 
-<main class="container admin" id="content">
-    <form action="image-delete.php?id=<?= $id ?>" method="POST" class="narrow">
-        <h1>Delete Image</h1>
-        <p>
-            <img src="../uploads/<?= html_escape($article['image_file']) ?>" alt="<?= html_escape($article['image_alt']) ?>">
-        </p>
-        <p>Click confirm to delete the image:</p>
-        <input type="submit" class="btn btn-primary" name="delete" value="Confirm">
-        <a href="article.php?id=<?= $id ?>" class="btn btn-danger">Cancel</a>
-    </form>
-</main>
-
-<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>
+echo $twig->render('admin/image-delete.html.twig', $data);

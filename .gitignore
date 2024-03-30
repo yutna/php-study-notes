@@ -76,3 +76,5 @@ $RECYCLE.BIN/
 php-and-mysql/section-b/c07/uploads/
 php-and-mysql/section-d/**/vendor/
 php-and-mysql/section-d/**/tmp/cache/
+*.env
+

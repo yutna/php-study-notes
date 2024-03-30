@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <main class="container admin" id="content">
+        <form action="{{ doc_root }}/admin/alt-text-edit.php?id={{ id }}" method="POST" class="narrow">
+            <h1>Update ALT Text</h1>
+
+            {% if errors.warning %}
+                <div class="alert alert-danger">
+                    {{ errors.warning }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="image_alt">Alt text: </label>
+                <input type="text" class="form-control" name="image_alt" id="image_alt" value="{{ article.image_alt | e('html_attr') }}" />
+                <div class="errors">{{ errors.alt }}</div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-save" name="delete" value="Confirm" />
+            </div>
+
+            <img src="{{ doc_root }}/uploads/{{ article.image_file | e('html_attr') }}" alt="{{ article.image_alt | e('html_attr') }}" />
+        </form>
+    </main>
+{% endblock %}

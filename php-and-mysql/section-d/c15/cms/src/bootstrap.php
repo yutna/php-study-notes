@@ -15,6 +15,13 @@ if (DEV === false) {
     register_shutdown_function('handle_shutdown');
 }
 
+// Load ENV variables
+$dotenv = \Dotenv\Dotenv::createImmutable(APP_ROOT);
+$dotenv->load();
+
+// Set ENV variables
+define('TINY_MCE_API_KEY', $_ENV['TINY_MCE_API_KEY']);
+
 // Initialize cms instance
 $cms = new \PhpBook\CMS\CMS($dsn, $username, $password);
 unset($dsn, $username, $password);
@@ -27,6 +34,7 @@ $twig_loader = new \Twig\Loader\FilesystemLoader(APP_ROOT . '/templates');
 $twig = new \Twig\Environment($twig_loader, $twig_options);
 
 $twig->addGlobal('doc_root', DOC_ROOT);
+$twig->addGlobal('tinyMCE_api_key', TINY_MCE_API_KEY);
 
 if (DEV) {
     $twig->addExtension(new \Twig\Extension\DebugExtension());

@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <main class="container admin" id="content">
+        <form action="{{ doc_root }}/admin/article-delete.php?id={{ id }}" method="POST" class="narrow">
+            <h1>Delete Article</h1>
+            <p>
+                Click confirm to delete the article:
+                <em>{{ article.title }}</em>
+            </p>
+            <input type="submit" class="btn btn-primary" name="delete" value="Confirm" />
+            <a href="{{ doc_root }}/admin/articles.php" class="btn btn-danger">Cancel</a>
+        </form>
+    </main>
+{% endblock %}

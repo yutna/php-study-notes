@@ -31,20 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         throw new Exception('Unable to delete article');
     }
 }
-?>
 
-<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
+$data['id'] = $id;
+$data['article'] = $article;
 
-<main class="container admin" id="content">
-    <form action="article-delete.php?id=<?= $id ?>" method="POST" class="narrow">
-        <h1>Delete Article</h1>
-        <p>
-            Click confirm to delete the article:
-            <em><?= html_escape($article['title']) ?></em>
-        </p>
-        <input type="submit" class="btn btn-primary" name="delete" value="Confirm">
-        <a href="articles.php" class="btn btn-danger">Cancel</a>
-    </form>
-</main>
-
-<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>
+echo $twig->render('admin/article-delete.html.twig', $data);

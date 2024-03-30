@@ -60,39 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>
 
-<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
+$data['id'] = $id;
+$data['errors'] = $errors;
+$data['category'] = $category;
 
-<main class="container admin" id="content">
-    <form action="category.php?id=<?= $id ?>" class="narrow" method="POST">
-        <h2>Edit Category</h2>
-
-        <?php if ($errors['warning']) { ?>
-            <div class="alert alert-danger">
-                <?= $errors['warning'] ?>
-            </div>
-        <?php } ?>
-
-        <div class="form-group">
-            <label for="name">Name: </label>
-            <input type="text" name="name" id="name" value="<?= html_escape($category['name']) ?>" class="form-control">
-            <span class="errors"><?= $errors['name'] ?></span>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description: </label>
-            <textarea name="description" id="description" class="form-control"><?= html_escape($category['description']) ?></textarea>
-            <span class="errors"><?= $errors['description'] ?></span>
-        </div>
-
-        <div class="form-check">
-            <input type="checkbox" name="navigation" id="navigation" value="1" class="form-check-input" <?= $category['navigation'] === 1 ? 'checked' : '' ?>>
-            <label for="navigation" class="form-check-label">Navigation</label>
-        </div>
-
-        <input type="submit" class="btn btn-primary btn-save" value="save">
-    </form>
-</main>
-
-<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>
+echo $twig->render('admin/category.html.twig', $data);

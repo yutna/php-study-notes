@@ -28,17 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('categories.php', ['failure' => 'Category contains articles that must be moved or deleted before you can delete the category']);
     }
 }
-?>
 
-<?php include APP_ROOT . '/public/includes/admin-header.php'; ?>
+$data['id'] = $id;
+$data['category'] = $category;
 
-<main class="container admin" id="content">
-    <form action="category-delete.php?id=<?= $id ?>" class="narrow" method="POST">
-        <h1>Delete Category</h1>
-        <p>Click confirm to delete the category <em><?= html_escape($category['name']) ?></em></p>
-        <input type="submit" name="delete" class="btn btn-primary" value="Confirm">
-        <a href="categories.php" class="btn btn-danger">Cancel</a>
-    </form>
-</main>
-
-<?php include APP_ROOT . '/public/includes/admin-footer.php'; ?>
+echo $twig->render('admin/category-delete.html.twig', $data);
