@@ -16,47 +16,10 @@ if (!$member) {
     include APP_ROOT . '/public/page-not-found.php';
 }
 
-$articles = $cms->getArticle()->getAll(true, null, $id);
-$navigation = $cms->getCategory()->getAll();
+$data['member'] = $member;
+$data['articles'] = $cms->getArticle()->getAll(true, null, $id);;
+$data['navigation'] = $cms->getCategory()->getAll();;
+$data['title'] = $member['forename'] . ' ' . $member['surname'];
+$data['description'] = $data['title'] . ' on Creative Folk';
 
-$section = '';
-$title = $member['forename'] . ' ' . $member['surname'];
-$description = $title . ' on Creative Folk';
-?>
-
-<?php include APP_ROOT . '/public/includes/header.php'; ?>
-
-<main class="container" id="content">
-    <section class="header">
-        <h1><?= html_escape($member['forename'] . ' ' . $member['surname']) ?></h1>
-        <p class="member">
-            <b>Member since:</b>
-            <?= format_date($member['joined']) ?>
-        </p>
-        <img alt="<?= html_escape($member['forename']) ?>" class="profile" src="uploads/<?= html_escape($member['picture'] ?? 'member.png') ?>">
-        <br>
-    </section>
-    <section class="grid">
-        <?php foreach ($articles as $article) { ?>
-            <article class="summary">
-                <a href="article.php?id=<?= $article['id'] ?>">
-                    <img alt="<? html_escape($article['image_alt']) ?>" src="uploads/<?= html_escape($article['image_file'] ?? 'blank.png') ?>">
-                    <h2><?= html_escape($article['title']) ?></h2>
-                    <p><?= html_escape($article['summary']) ?></p>
-                </a>
-                <p class="credit">
-                    Posted in
-                    <a href="category.php?id=<?= $article['category_id'] ?>">
-                        <?= html_escape($article['category']) ?>
-                    </a>
-                    by
-                    <a href="member.php?id=<?= $article['member_id'] ?>">
-                        <?= html_escape($article['author']) ?>
-                    </a>
-                </p>
-            </article>
-        <?php } ?>
-    </section>
-</main>
-
-<?php include APP_ROOT . '/public/includes/footer.php'; ?>
+echo $twig->render('member.html.twig', $data);

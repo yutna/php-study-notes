@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block description %}
+    {{ description | e('html_attr') }}
+{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>{{ member.forename }} {{ member.surname }}</h1>
+            <p class="member">
+                <b>Member since:</b>
+                {{ member.joined | date('F d, Y') }}
+            </p>
+
+            {% if member.picture %}
+                <img alt="{{ member.forename | e('html_attr') }}" src="{{ doc_root }}/uploads/{{ member.picture }}">
+            {% else %}
+                <img alt="{{ member.forename | e('html_attr') }}" src="{{ doc_root }}/uploads/member.png">
+            {% endif %}
+
+            <br>
+        </section>
+        <section class="grid">
+            {{ include('article-summaries.html.twig') }}
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% for article in articles %}
+    <article class="summary">
+        <a href="{{doc_root}}/article.php?id={{ article.id }}">
+            {% if article.image_file %}
+                <img alt="{{ article.image_alt | e('html_attr') }}" src="{{ doc_root }}/uploads/{{ article.image_file }}">
+            {% else %}
+                <img alt="Placeholder image" src="{{ doc_root }}/uploads/blank.png">
+            {% endif %}
+
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.summary }}</p>
+        </a>
+        <p class="credit">
+            Posted in
+            <a href="{{ doc_root }}/category.php?id={{ article.category_id }}">
+                {{ article.category }}
+            </a>
+            by
+            <a href="{{ doc_root }}/member.php?id={{ article.member_id }}">
+                {{ article.author }}
+            </a>
+        </p>
+    </article>
+{% endfor %}

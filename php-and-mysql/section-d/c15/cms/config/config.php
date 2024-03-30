@@ -13,7 +13,7 @@ $password = 'secret';
 $dsn = "$type:host=$server;dbname=$db;port=$port;charset=$charset";
 
 // Document setting
-define('DOC_ROOT', dirname(mb_substr(__DIR__, mb_strlen($_SERVER['DOCUMENT_ROOT']))) . '/public/');
+define('DOC_ROOT', dirname(mb_substr(__DIR__, mb_strlen($_SERVER['DOCUMENT_ROOT']))) . '/public');
 
 // Environment setting
 define('DEV', true);
