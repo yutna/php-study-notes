@@ -329,7 +329,7 @@ function get_php_and_mysql_sections(array $sections): string
     $html_content = '';
 
     foreach ($sections as $section_name => $section_contents) {
-        $path_url = PHP_OS === "Darwin" ? '/php-and-mysql/' : '/php-playground/php-and-mysql/';
+        $path_url = '/php-and-mysql/';
         $base_url_with_section_name = $path_url . $section_name;
 
         $html_content .= get_php_and_mysql_section_name_heading($section_name);
