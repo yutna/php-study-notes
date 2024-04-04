@@ -253,6 +253,13 @@ $php_and_mysql_data = [
                     'cms/public/index.php',
                 ],
             ],
+            [
+                'title' => 'Chapter 16: Membership',
+                'folder_name' => 'c16',
+                'pages' => [
+                    'cms/public/index.php',
+                ]
+            ]
         ],
     ],
 ];

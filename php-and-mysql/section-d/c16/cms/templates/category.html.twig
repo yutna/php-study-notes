@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block description %}
+    {{ description | e('html_attr') }}
+{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.description }}</p>
+        </section>
+        <section class="grid">
+            {{ include('article-summaries.html.twig') }}
+        </section>
+    </main>
+{% endblock %}
