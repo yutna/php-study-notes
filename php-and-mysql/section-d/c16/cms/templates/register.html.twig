@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block description %}Register for Creative Folk{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>Register</h1>
+        </section>
+
+        <form action="{{ doc_root }}/register.php" class="form-membership" method="POST">
+            {% if errors %}
+                <div class="alert alert-danger">
+                    Please correct errors
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="forename">Forename: </label>
+                <input type="text" class="form-control" name="forename" id="forename" value="{{ member.forename }}" />
+                <div class="errors">{{ errors.forename }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="surname">Surname: </label>
+                <input type="text" class="form-control" name="surname" id="surname" value="{{ member.surname }}" />
+                <div class="errors">{{ errors.surname }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ member.email }}" />
+                <div class="errors">{{ errors.email }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" class="form-control" name="password" id="password" />
+                <div class="errors">{{ errors.password | raw }}</div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm">Confirm: </label>
+                <input type="password" class="form-control" name="confirm" id="confirm" />
+                <div class="errors">{{ errors.confirm }}</div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Register" />
+        </form>
+    </main>
+{% endblock %}

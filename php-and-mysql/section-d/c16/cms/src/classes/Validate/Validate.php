@@ -36,6 +36,19 @@ class Validate
         return ($number >= $min) && ($number <= $max);
     }
 
+    public static function isPassword($password): bool
+    {
+        if ((mb_strlen($password) >= 8) and
+            preg_match('/[A-Z]/', $password) and
+            preg_match('/[a-z]/', $password) and
+            preg_match('/[0-9]/', $password)
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function isText($text, $min = 0, $max = 1000): bool
     {
         $length = mb_strlen($text);
