@@ -8,6 +8,7 @@ class CMS
     protected $article = null;
     protected $category = null;
     protected $member = null;
+    protected $session = null;
 
     public function __construct(string $dsn, string $username, string $password)
     {
@@ -39,5 +40,14 @@ class CMS
         }
 
         return $this->member;
+    }
+
+    public function getSession()
+    {
+        if ($this->session === null) {
+            $this->session = new Session();
+        }
+
+        return $this->session;
     }
 }

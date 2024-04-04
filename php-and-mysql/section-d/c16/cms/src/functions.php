@@ -28,6 +28,14 @@ function html_escape(string | null $text): string
     return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', false);
 }
 
+function is_admin($role)
+{
+    if ($role !== 'admin') {
+        header('Location: ' . DOC_ROOT);
+        exit;
+    }
+}
+
 // TODO: remove this
 function pdo(PDO $pdo, string $sql, array $arguments = null): PDOStatement
 {
@@ -46,7 +54,7 @@ function redirect(string $location, array $parameters = [], $response_code = 302
     $qs = $parameters ? '?' . http_build_query($parameters) : '';
     $location = $location . $qs;
 
-    header("Location: $location", true, $response_code);
+    header('Location: ' . DOC_ROOT . '/' . $location, true, $response_code);
     exit;
 }
 

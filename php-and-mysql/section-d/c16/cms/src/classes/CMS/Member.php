@@ -46,4 +46,21 @@ class Member
             throw $e;
         }
     }
+
+    public function login(string $email, string $password)
+    {
+        $sql = "SELECT id, forename, surname, joined, email, password, picture, role
+                FROM member
+                WHERE email = :email;";
+
+        $member = $this->db->runSQL($sql, [$email])->fetch();
+
+        if (!$member) {
+            return false;
+        }
+
+        $authenticated = password_verify($password, $member['password']);
+
+        return $authenticated ? $member : false;
+    }
 }

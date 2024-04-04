@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require '../../src/bootstrap.php';
 
+is_admin($session->role);
+
 $deleted = null;
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 

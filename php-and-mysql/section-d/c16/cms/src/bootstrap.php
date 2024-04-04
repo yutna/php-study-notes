@@ -1,6 +1,9 @@
 <?php
 
 // Application root setting
+
+use PhpBook\CMS\Session;
+
 define('APP_ROOT', dirname(__DIR__));
 
 // Required files
@@ -26,6 +29,9 @@ define('TINY_MCE_API_KEY', $_ENV['TINY_MCE_API_KEY']);
 $cms = new \PhpBook\CMS\CMS($dsn, $username, $password);
 unset($dsn, $username, $password);
 
+// Initialize session instance
+$session = $cms->getSession();
+
 // Set Twig template engine
 $twig_options['cache'] = APP_ROOT . '/tmp/cache';
 $twig_options['debug'] = DEV;
@@ -35,6 +41,7 @@ $twig = new \Twig\Environment($twig_loader, $twig_options);
 
 $twig->addGlobal('doc_root', DOC_ROOT);
 $twig->addGlobal('tinyMCE_api_key', TINY_MCE_API_KEY);
+$twig->addGlobal('session', $session);
 
 if (DEV) {
     $twig->addExtension(new \Twig\Extension\DebugExtension());

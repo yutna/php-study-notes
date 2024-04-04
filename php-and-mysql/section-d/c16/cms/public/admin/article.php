@@ -6,6 +6,8 @@ use PhpBook\Validate\Validate;
 
 require '../../src/bootstrap.php';
 
+is_admin($session->role);
+
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $temp = $_FILES['image']['tmp_name'] ?? '';
 $destination = '';
