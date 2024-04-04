@@ -39,3 +39,9 @@ $twig->addGlobal('tinyMCE_api_key', TINY_MCE_API_KEY);
 if (DEV) {
     $twig->addExtension(new \Twig\Extension\DebugExtension());
 }
+
+// Set Email config
+$email_config['server'] = $_ENV['SENGRID_HOST'];
+$email_config['port'] = $_ENV['SENGRID_PORT'];
+$email_config['password'] = $_ENV['SENGRID_API_KEY'];
+$email_config['admin_email'] = $_ENV['ADMIN_EMAIL'];
