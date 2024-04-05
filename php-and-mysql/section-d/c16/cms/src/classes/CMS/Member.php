@@ -49,6 +49,12 @@ class Member
         }
     }
 
+    public function count(): int
+    {
+        $sql = "SELECT COUNT(id) FROM member;";
+        return $this->db->runSQL($sql)->fetchColumn();
+    }
+
     public function login(string $email, string $password)
     {
         $sql = "SELECT id, forename, surname, joined, email, password, picture, role
