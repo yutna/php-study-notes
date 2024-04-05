@@ -20,5 +20,9 @@
                 {{ article.author }}
             </a>
         </p>
+
+        {% if session.id == article.member_id %}
+            <a href="{{ doc_root }}/work.php?id={{ article.id }}" class="btn btn-primary">Edit</a>
+        {% endif %}
     </article>
 {% endfor %}

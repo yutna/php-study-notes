@@ -128,8 +128,8 @@ class Article
                 $article['image_id'] = $this->db->lastInsertId();
             }
 
-            $sql = "INSERT INTO article (title, summary, content, category_id, member_id, image_id, published)
-                    VALUES (:title, :summary, :content, :category_id, :member_id, :image_id, :published)";
+            $sql = "INSERT INTO article (title, summary, content, category_id, member_id, image_id, published, seo_title)
+                    VALUES (:title, :summary, :content, :category_id, :member_id, :image_id, :published, :seo_title)";
 
             unset($article['image_file'], $article['image_alt']);
 
@@ -177,7 +177,8 @@ class Article
                         category_id = :category_id,
                         member_id = :member_id,
                         image_id = :image_id,
-                        published = :published
+                        published = :published,
+                        seo_title = :seo_title
                     WHERE id = :id";
 
             unset($article['category'], $article['created'], $article['author'], $article['image_file'], $article['image_alt']);

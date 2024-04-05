@@ -16,6 +16,21 @@ function create_filename(string $filename, string $upload_path): string
     return $filename;
 }
 
+function create_seo_name(string $text): string
+{
+    $text = mb_strtolower($text);
+    $text = trim($text);
+
+    if (function_exists('transliterator_transliterate')) {
+        $text = transliterator_transliterate('Latin-ASCII', $text);
+    }
+
+    $text = preg_replace('/ /', '-', $text);
+    $text = preg_replace('/[^-A-z0-9 ]+/', '', $text);
+
+    return $text;
+}
+
 function format_date(string $string): string
 {
     $date = strtotime($string);
