@@ -2,6 +2,8 @@
 
 namespace PhpBook\CMS;
 
+use Exception;
+
 class Member
 {
     protected $db;
@@ -62,5 +64,44 @@ class Member
         $authenticated = password_verify($password, $member['password']);
 
         return $authenticated ? $member : false;
+    }
+
+    public function pictureCreate(int $id, string $filename, string $temporary, string $destination): bool
+    {
+        if ($temporary) {
+            $image = new \Imagick($temporary);
+            $image->cropThumbnailImage(350, 350);
+            $saved = $image->writeImage($destination);
+
+            if ($saved == false) {
+                throw new Exception('Unable to save image');
+            }
+        }
+
+        $filename = basename($destination);
+        $sql = "UPDATE member
+                SET picture = :picture
+                WHERE id = :id;";
+
+        $this->db->runSQL($sql, ['id' => $id, 'picture' => $filename]);
+
+        return true;
+    }
+
+    public function pictureDelete(int $id, string $path): bool
+    {
+        $unlink = unlink($path);
+
+        if ($unlink === false) {
+            throw new Exception('Unable to delete image or image is missing');
+        }
+
+        $sql = "UPDATE member
+                SET picture = null
+                WHERE id = :id;";
+
+        $this->db->runSQL($sql, [$id]);
+
+        return true;
     }
 }

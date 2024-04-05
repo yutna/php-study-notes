@@ -6,7 +6,7 @@ use PhpBook\Validate\Validate;
 
 require '../src/bootstrap.php';
 
-if ($session->id === 0) {
+if ($cms->getSession()->id === 0) {
     redirect('login.php');
 }
 
