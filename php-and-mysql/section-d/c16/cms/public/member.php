@@ -21,5 +21,6 @@ $data['articles'] = $cms->getArticle()->getAll(true, null, $id);;
 $data['navigation'] = $cms->getCategory()->getAll();;
 $data['title'] = $member['forename'] . ' ' . $member['surname'];
 $data['description'] = $data['title'] . ' on Creative Folk';
+$data['success'] = $_GET['success'] ?? '';
 
 echo $twig->render('member.html.twig', $data);

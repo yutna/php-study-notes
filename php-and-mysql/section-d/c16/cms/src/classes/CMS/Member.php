@@ -15,7 +15,7 @@ class Member
 
     public function get(int $id)
     {
-        $sql = "SELECT id, forename, surname, joined, picture
+        $sql = "SELECT id, forename, surname, email, joined, picture, role
                 FROM member
                 WHERE id = :id";
 
@@ -24,7 +24,7 @@ class Member
 
     public function getAll(): array
     {
-        $sql = "SELECT id, forename, surname, joined, picture
+        $sql = "SELECT id, forename, surname, email, joined, picture, role
                 FROM member";
 
         return $this->db->runSQL($sql)->fetchAll();
@@ -101,6 +101,31 @@ class Member
                 WHERE id = :id;";
 
         $this->db->runSQL($sql, [$id]);
+
+        return true;
+    }
+
+    public function update(array $member): bool
+    {
+        unset($member['joined'], $member['picture']);
+
+        try {
+            $sql = "UPDATE member
+                    SET forename = :forename,
+                        surname = :surname,
+                        email = :email,
+                        role = :role
+                    WHERE id = :id;";
+
+            $this->db->runSQL($sql, $member);
+            return true;
+        } catch (\PDOException $e) {
+            if ($e->errorInfo[1] === 1062) {
+                return false;
+            }
+
+            throw $e;
+        }
 
         return true;
     }
