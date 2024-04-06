@@ -55,6 +55,15 @@ class Member
         return $this->db->runSQL($sql)->fetchColumn();
     }
 
+    public function getIdByEmail(string $email)
+    {
+        $sql = "SELECT id
+                FROM member
+                WHERE email = :email;";
+
+        return $this->db->runSQL($sql, [$email])->fetchColumn();
+    }
+
     public function login(string $email, string $password)
     {
         $sql = "SELECT id, forename, surname, joined, email, password, picture, role
@@ -70,6 +79,18 @@ class Member
         $authenticated = password_verify($password, $member['password']);
 
         return $authenticated ? $member : false;
+    }
+
+    public function passwordUpdate(int $id, string $password): bool
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE member
+                SET password = :password
+                WHERE id = :id;";
+
+        $this->db->runSQL($sql, ['id' => $id, 'password' => $hash]);
+
+        return true;
     }
 
     public function pictureCreate(int $id, string $filename, string $temporary, string $destination): bool

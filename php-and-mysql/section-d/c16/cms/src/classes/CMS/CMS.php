@@ -9,6 +9,7 @@ class CMS
     protected $category = null;
     protected $member = null;
     protected $session = null;
+    protected $token = null;
 
     public function __construct(string $dsn, string $username, string $password)
     {
@@ -49,5 +50,14 @@ class CMS
         }
 
         return $this->session;
+    }
+
+    public function getToken()
+    {
+        if ($this->token === null) {
+            $this->token = new Token($this->db);
+        }
+
+        return $this->token;
     }
 }

@@ -18,6 +18,9 @@ define('DOC_ROOT', dirname(mb_substr(__DIR__, mb_strlen($_SERVER['DOCUMENT_ROOT'
 // Environment setting
 define('DEV', true);
 
+// Host setting
+define('DOMAIN', 'http://php-playground.test');
+
 // File upload settings
 define('FILE_EXTENSIONS', ['jpeg', 'jpg', 'png', 'gif']);
 define('MAX_SIZES', 5242880);
