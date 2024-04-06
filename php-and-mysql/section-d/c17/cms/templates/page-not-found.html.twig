@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block description %}
+    {{ description | e('html_attr') }}
+{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <h1>Sorry! We cannot find that page.</h1>
+        <p>
+            Try the <a href="{{ doc_root }}/index.php">home page</a> or email us
+            <a href="mailto:hello@eg.link">hello@eg.link</a>
+        </p>
+    </main>
+{% endblock %}

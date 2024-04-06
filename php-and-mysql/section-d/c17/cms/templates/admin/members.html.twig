@@ -1,0 +1,52 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>Members</h1>
+
+            {% if success %}
+                <div class="alert alert-success">
+                    {{ success }}
+                </div>
+            {% endif %}
+
+            {% if failure %}
+                <div class="alert alert-danger">
+                    {{ failure }}
+                </div>
+            {% endif %}
+        </section>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Profile picture</th>
+                    <th>Forename</th>
+                    <th>Surname</th>
+                    <th>Role</th>
+                    <th>Edit role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                    <tr>
+                        <td>
+                            {% if member.picture %}
+                                <img alt="{{ member.forename }}" src="{{ doc_root }}/uploads/{{ member.picture }}" class="profile" />
+                            {% else %}
+                                <img alt="Profile placeholder" src="{{ doc_root }}/uploads/member.png" class="profile" />
+                            {% endif %}
+                        </td>
+                        <td>{{ member.forename }}</td>
+                        <td>{{ member.surname }}</td>
+                        <td>{{ member.role }}</td>
+                        <td>
+                            <a href="{{ doc_root }}/admin/edit-role.php?id={{ member.id }}" class="btn btn-primary">Edit role</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

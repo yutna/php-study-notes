@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block description %}
+    {{ description | e('html_attr') }}
+{% endblock %}
+
+{% block content %}
+    <main class="article container">
+         <section class="image">
+            {% if article.image_file %}
+                <img alt="{{ article.image_alt | e('html_attr') }}" src="{{ doc_root }}/uploads/{{ article.image_file }}" />
+            {% else %}
+                <img alt="Placeholder image" src="{{ doc_root }}/uploads/blank.png" />
+            {% endif %}
+         </section>
+         <section class="text">
+            <h1>{{ article.title }}</h1>
+            <div class="date">{{ article.created | date('F d, Y') }}</div>
+            <div class="content">{{ article.content | raw }}</div>
+            <p class="credit">
+                Posted in
+                <a href="{{ doc_root }}/category.php?id={{ article.category_id }}">
+                    {{ article.category }}
+                </a>
+                by
+                <a href="{{ doc_root }}/member.php?id={{ article.member_id }}">{{ article.author }}</a>
+            </p>
+         </section>
+    </main>
+{% endblock %}

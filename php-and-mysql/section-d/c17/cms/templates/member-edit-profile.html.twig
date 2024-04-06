@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Update profile{% endblock %}
+{% block description %}Update profile for Creative Folk{% endblock %}
+
+{% block content %}
+    <main class="container" id="content">
+        <section class="header">
+            <h1>Update profile</h1>
+        </section>
+
+        <form action="{{ doc_root }}/member-edit-profile.php" method="POST" class="form-membership">
+            {% if errors.message %}
+                <div class="alert alert-danger">
+                    {{ errors.message }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="forename">Forename: </label>
+                <input type="text" class="form-control" name="forename" id="forename" value="{{ member.forename }}" />
+                <span class="errors">{{ errors.forename }}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="surname">Surname: </label>
+                <input type="text" class="form-control" name="surname" id="surname" value="{{ member.surname }}" />
+                <span class="errors">{{ errors.surname }}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ member.email }}" />
+                <span class="errors">{{ errors.email }}</span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </main>
+{% endblock %}
