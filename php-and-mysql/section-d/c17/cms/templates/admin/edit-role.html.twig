@@ -2,7 +2,7 @@
 
 {% block content %}
     <main class="container" id="content">
-        <form action="{{ doc_root }}/admin/edit-role.php?id={{ member.id }}" method="POST" class="narrow">
+        <form action="{{ doc_root }}/admin/edit-role/{{ member.id }}" method="POST" class="narrow">
             <h1>Edit Role</h1>
             <p>Member name: {{ member.forename }} {{ member.surname }}</p>
             <select name="role" class="form-control">

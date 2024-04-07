@@ -2,7 +2,7 @@
 
 {% block content %}
     <main class="container admin" id="content">
-        <form action="{{ doc_root }}/admin/alt-text-edit.php?id={{ id }}" method="POST" class="narrow">
+        <form action="{{ doc_root }}/admin/alt-text-edit/{{ id }}" method="POST" class="narrow">
             <h1>Update ALT Text</h1>
 
             {% if errors.warning %}

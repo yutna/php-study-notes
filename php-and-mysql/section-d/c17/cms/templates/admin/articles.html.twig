@@ -18,7 +18,7 @@
             {% endif %}
 
             <p>
-                <a href="{{ doc_root }}/admin/article.php" class="btn btn-primary">
+                <a href="{{ doc_root }}/admin/article" class="btn btn-primary">
                     Add new article
                 </a>
             </p>
@@ -59,10 +59,10 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ doc_root }}/admin/article.php?id={{ article.id }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ doc_root }}/admin/article/{{ article.id }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <a href="{{ doc_root }}/admin/article-delete.php?id={{ article.id }}" class="btn btn-danger">Delete</a>
+                            <a href="{{ doc_root }}/admin/article-delete/{{ article.id }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

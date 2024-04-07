@@ -2,14 +2,14 @@
 
 {% block content %}
     <main class="container admin" id="content">
-        <form action="{{ doc_root }}/admin/image-delete.php?id={{ id }}" method="POST" class="narrow">
+        <form action="{{ doc_root }}/admin/image-delete/{{ id }}" method="POST" class="narrow">
             <h1>Delete Image</h1>
             <p>
                 <img alt="{{ article.image_alt | e('html_attr') }}" src="{{ doc_root }}/uploads/{{ article.image_file | e('html_attr') }}" />
             </p>
             <p>Click confirm to delete the image:</p>
             <input type="submit" class="btn btn-primary" name="delete" value="Confirm" />
-            <a href="{{ doc_root }}/admin/article.php?id={{ id }}" class="btn btn-danger">Cancel</a>
+            <a href="{{ doc_root }}/admin/article/{{ id }}" class="btn btn-danger">Cancel</a>
         </form>
     </main>
 {% endblock %}

@@ -23,11 +23,11 @@
             <div class="content">{{ article.content | raw }}</div>
             <p class="credit">
                 Posted in
-                <a href="{{ doc_root }}/category.php?id={{ article.category_id }}">
+                <a href="{{ doc_root }}/category/{{ article.category_id }}/{{ article.seo_category }}">
                     {{ article.category }}
                 </a>
                 by
-                <a href="{{ doc_root }}/member.php?id={{ article.member_id }}">{{ article.author }}</a>
+                <a href="{{ doc_root }}/member/{{ article.member_id }}">{{ article.author }}</a>
             </p>
          </section>
     </main>

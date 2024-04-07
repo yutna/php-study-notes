@@ -1,6 +1,6 @@
 {% for article in articles %}
     <article class="summary">
-        <a href="{{doc_root}}/article.php?id={{ article.id }}">
+        <a href="{{doc_root}}/article/{{ article.id }}/{{ article.seo_title }}">
             {% if article.image_file %}
                 <img alt="{{ article.image_alt | e('html_attr') }}" src="{{ doc_root }}/uploads/{{ article.image_file }}">
             {% else %}
@@ -12,17 +12,17 @@
         </a>
         <p class="credit">
             Posted in
-            <a href="{{ doc_root }}/category.php?id={{ article.category_id }}">
+            <a href="{{ doc_root }}/category/{{ article.category_id }}/{{ article.seo_category }}">
                 {{ article.category }}
             </a>
             by
-            <a href="{{ doc_root }}/member.php?id={{ article.member_id }}">
+            <a href="{{ doc_root }}/member/{{ article.member_id }}">
                 {{ article.author }}
             </a>
         </p>
 
         {% if session.id == article.member_id %}
-            <a href="{{ doc_root }}/work.php?id={{ article.id }}" class="btn btn-primary">Edit</a>
+            <a href="{{ doc_root }}/work/{{ article.id }}" class="btn btn-primary">Edit</a>
         {% endif %}
     </article>
 {% endfor %}

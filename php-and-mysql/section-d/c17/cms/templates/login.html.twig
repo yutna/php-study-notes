@@ -9,7 +9,7 @@
             <h1>Log in</h1>
         </section>
 
-        <form action="{{ doc_root }}/login.php" method="POST" class="form-membership">
+        <form action="{{ doc_root }}/login" method="POST" class="form-membership">
             {% if success %}
                 <div class="alert alert-success">
                     {{ success }}
@@ -37,7 +37,7 @@
             <input type="submit" class="btn btn-primary" value="Log in" />
 
             <p>
-                <a href="{{ doc_root }}/password-lost.php">Lost password</a>
+                <a href="{{ doc_root }}/password-lost">Lost password</a>
             </p>
         </form>
     </main>

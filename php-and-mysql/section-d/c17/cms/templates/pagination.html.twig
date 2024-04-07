@@ -4,11 +4,11 @@
             {% for i in 1..total_pages %}
                 <li>
                     {% if loop.index == current_page %}
-                        <a href="{{ doc_root }}/search.php?term={{ term | e('html_attr') }}&show={{ show }}&from={{ (loop.index - 1) * show }}" class="btn active" aria-current="true">
+                        <a href="{{ doc_root }}/search?term={{ term | e('html_attr') }}&show={{ show }}&from={{ (loop.index - 1) * show }}" class="btn active" aria-current="true">
                             {{ loop.index }}
                         </a>
                     {% else %}
-                        <a href="{{ doc_root }}/search.php?term={{ term | e('html_attr') }}&show={{ show }}&from={{ (loop.index - 1) * show }}" class="btn">
+                        <a href="{{ doc_root }}/search?term={{ term | e('html_attr') }}&show={{ show }}&from={{ (loop.index - 1) * show }}" class="btn">
                             {{ loop.index }}
                         </a>
                     {% endif %}

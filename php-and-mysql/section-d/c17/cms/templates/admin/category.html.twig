@@ -2,7 +2,7 @@
 
 {% block content %}
     <main class="container admin" id="content">
-        <form action="{{ doc_root }}/admin/category.php?id={{ id }}" class="narrow" method="POST">
+        <form action="{{ doc_root }}/admin/category/{{ id }}" class="narrow" method="POST">
             <h2>Edit Category</h2>
 
             {% if errors.warning %}

@@ -9,7 +9,7 @@
             <h1>Update profile</h1>
         </section>
 
-        <form action="{{ doc_root }}/member-edit-profile.php" method="POST" class="form-membership">
+        <form action="{{ doc_root }}/member-edit-profile" method="POST" class="form-membership">
             {% if errors.message %}
                 <div class="alert alert-danger">
                     {{ errors.message }}
