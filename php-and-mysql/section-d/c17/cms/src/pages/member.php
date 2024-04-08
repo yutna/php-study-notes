@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-require '../src/bootstrap.php';
-
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 if (!$id) {
-    include APP_ROOT . '/public/page-not-found.php';
+    include APP_ROOT . '/src/pages/page-not-found.php';
 }
 
 $member = $cms->getMember()->get($id);
 
 if (!$member) {
-    include APP_ROOT . '/public/page-not-found.php';
+    include APP_ROOT . '/src/pages/page-not-found.php';
 }
 
 $data['member'] = $member;

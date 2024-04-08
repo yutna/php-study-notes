@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 $email = '';
 $errors = [];
 
 if ($session->id > 0) {
-    redirect('member.php', ['id' => $session->id]);
+    redirect('member/' . $session->id);
 }
 
 $success = $_GET['success'] ?? null;
@@ -35,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors['message'] = 'Account suspended';
         } elseif ($member) {
             $cms->getSession()->create($member);
-            redirect('member.php', ['id' => $member['id']]);
+            redirect('member/' . $member['id']);
         } else {
             $errors['message'] = 'Please try again.';
         }

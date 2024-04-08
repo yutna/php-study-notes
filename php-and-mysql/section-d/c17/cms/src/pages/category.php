@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-require '../src/bootstrap.php';
-
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 if (!$id) {
-    include APP_ROOT . '/public/page-not-found.php';
+    include APP_ROOT . '/src/pages/page-not-found.php';
 }
 
 $category = $cms->getCategory()->get($id);
 
 if (!$category) {
-    include  APP_ROOT . '/public/page-not-found.php';
+    include  APP_ROOT . '/src/pages/page-not-found.php';
+}
+
+if (mb_strtolower($parts[3]) != mb_strtolower($category['seo_name'])) {
+    redirect('category/' . $id . '/' . $category['seo_name'], [], 301);
 }
 
 $data['category'] = $category;

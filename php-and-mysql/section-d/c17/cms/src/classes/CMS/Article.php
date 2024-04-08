@@ -13,8 +13,9 @@ class Article
 
     public function get(int $id, bool $published = true)
     {
-        $sql = "SELECT a.id, a.title, a.summary, a.content, a.created, a.category_id, a.member_id, a.published,
+        $sql = "SELECT a.id, a.title, a.summary, a.content, a.created, a.category_id, a.member_id, a.published, a.seo_title,
                        c.name AS category,
+                       c.seo_name AS seo_category,
                        CONCAT(m.forename, ' ', m.surname) AS author,
                        i.id AS image_id,
                        i.file AS image_file,
@@ -40,8 +41,9 @@ class Article
         $arguments['member1'] = $member;
         $arguments['limit'] = $limit;
 
-        $sql = "SELECT a.id, a.title, a.summary, a.created, a.category_id, a.member_id, a.published,
+        $sql = "SELECT a.id, a.title, a.summary, a.created, a.category_id, a.member_id, a.published, a.seo_title,
                        c.name AS category,
+                       c.seo_name AS seo_category,
                        CONCAT(m.forename, ' ', m.surname) AS author,
                        i.file AS image_file,
                        i.alt AS image_alt
@@ -85,8 +87,9 @@ class Article
         $arguments['show'] = $show;
         $arguments['from'] = $from;
 
-        $sql = "SELECT a.id, a.title, a.summary, a.created, a.category_id, a.member_id,
+        $sql = "SELECT a.id, a.title, a.summary, a.created, a.category_id, a.member_id, a.seo_title,
                        c.name AS category,
+                       c.seo_name AS seo_category,
                        CONCAT(m.forename, ' ', m.surname) AS author,
                        i.file AS image_file,
                        i.alt AS image_alt
@@ -181,7 +184,7 @@ class Article
                         seo_title = :seo_title
                     WHERE id = :id";
 
-            unset($article['category'], $article['created'], $article['author'], $article['image_file'], $article['image_alt']);
+            unset($article['category'], $article['seo_category'], $article['created'], $article['author'], $article['image_file'], $article['image_alt']);
 
             $this->db->runSQL($sql, $article)->rowCount();
             $this->db->commit();

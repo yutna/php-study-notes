@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../../src/bootstrap.php';
-
 is_admin($session->role);
 
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $saved = false;
 
 $category = [
@@ -29,7 +26,7 @@ if ($id) {
     $category = $cms->getCategory()->get($id);
 
     if (!$category) {
-        redirect('categories.php', ['failure' => 'Category not found']);
+        redirect('admin/categories/', ['failure' => 'Category not found']);
     }
 }
 
@@ -37,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category['name'] = $_POST['name'];
     $category['description'] = $_POST['description'];
     $category['navigation'] = isset($_POST['navigation']) && ($_POST['navigation'] == 1) ? 1 : 0;
+    $category['seo_name'] = create_seo_name($category['name']);
 
     $errors['name'] = Validate::isText($category['name'], 1, 24) ? '' : 'Name should be 1-24 characters.';
     $errors['description'] = Validate::isText($category['description'], 1, 254) ? '' : 'Description should be 1-254 characters.';
@@ -56,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($saved) {
-            redirect('categories.php', ['success' => 'Category saved']);
+            redirect('admin/categories/', ['success' => 'Category saved']);
         } else {
             $errors['warning'] = 'Category name already in use';
         }

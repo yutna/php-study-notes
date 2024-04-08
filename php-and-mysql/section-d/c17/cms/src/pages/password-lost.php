@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 $error = false;
 $sent = false;
 
@@ -18,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($id) {
             $token = $cms->getToken()->create($id, 'password_reset');
-            $link = DOMAIN . DOC_ROOT . '/password-reset.php?token=' . $token;
+            $link = DOMAIN . DOC_ROOT . '/password-reset?token=' . $token;
             $subject = 'Reset Password Link';
             $body = 'To reset password click: <a href="' . $link . '">' . $link . '</a>';
             $mail = new \PhpBook\Email\Email($email_config);

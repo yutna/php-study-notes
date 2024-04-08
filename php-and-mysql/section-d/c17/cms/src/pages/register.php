@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 $member = [];
 $errors = [];
 
@@ -32,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result === false) {
             $errors['email'] = 'Email address already used';
         } else {
-            redirect(DOC_ROOT . '/login.php', ['success' => 'Thanks for joining! Please log in.']);
+            redirect('login/', ['success' => 'Thanks for joining! Please log in.']);
         }
     }
 }

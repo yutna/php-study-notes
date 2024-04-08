@@ -5,8 +5,6 @@ declare(strict_types=1);
 use PhpBook\Email\Email;
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 $from = '';
 $message = '';
 $errors = [];

@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-require '../src/bootstrap.php';
-
 $errors = '';
 
 $id = $cms->getSession()->id;
 
 if ($id === 0) {
-    redirect('login.php');
+    redirect('login/');
 }
 
 $member = $cms->getMember()->get($id);
@@ -17,7 +15,7 @@ $delete = $_POST['delete'] ?? '';
 
 if ($delete === 'delete') {
     $cms->getMember()->pictureDelete($id, UPLOADS . $member['picture']);
-    redirect('member.php', ['id' => $id, 'success' => 'Picture deleted']);
+    redirect('member/' . $id . '/', ['success' => 'Picture deleted']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$errors) {
             $filename = create_filename($_FILES['image']['name'], UPLOADS);
             $cms->getMember()->pictureCreate($id, $filename, $temp, UPLOADS . $filename);
-            redirect('member.php', ['id' => $id, 'success' => 'Picture updated.']);
+            redirect('member/' . $id . '/', ['success' => 'Picture updated.']);
         } else {
             $errors .= 'Please try again.';
         }

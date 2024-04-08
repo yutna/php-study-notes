@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require '../../src/bootstrap.php';
-
 is_admin($cms->getSession()->role);
 
 $data['navigation'] = $cms->getCategory()->getAll();

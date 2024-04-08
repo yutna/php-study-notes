@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 $id = $cms->getSession()->id;
 
 if ($id === 0) {
-    redirect('login.php');
+    redirect('login/');
 }
 
 $errors = [];
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors['message'] = 'Email already in use';
         } else {
             $cms->getSession()->update($member);
-            redirect('member.php', ['id' => $member['id'], 'success' => 'Profile saved']);
+            redirect('member/' . $member['id'] . '/', ['success' => 'Profile saved']);
         }
     }
 }

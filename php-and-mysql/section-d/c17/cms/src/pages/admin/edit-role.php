@@ -2,20 +2,16 @@
 
 declare(strict_types=1);
 
-require '../../src/bootstrap.php';
-
 is_admin($cms->getSession()->role);
 
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 if (!$id) {
-    redirect('admin/members.php', ['failure' => 'Member not found']);
+    redirect('admin/members/', ['failure' => 'Member not found']);
 }
 
 $member = $cms->getMember()->get($id);
 
 if (!$member) {
-    redirect('admin/members.php', ['failure' => 'Member not found']);
+    redirect('admin/members/', ['failure' => 'Member not found']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (in_array($role, ['member', 'admin', 'suspended'])) {
         $member['role'] = $role;
         $cms->getMember()->update($member);
-        redirect('admin/members.php', ['success' => 'Role updated']);
+        redirect('admin/members/', ['success' => 'Role updated']);
     }
 }
 

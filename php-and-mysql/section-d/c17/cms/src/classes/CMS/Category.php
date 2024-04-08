@@ -13,7 +13,7 @@ class Category
 
     public function get(int $id)
     {
-        $sql = "SELECT id, name, description, navigation
+        $sql = "SELECT id, name, description, navigation, seo_name
                 FROM category
                 WHERE id = :id";
 
@@ -22,7 +22,7 @@ class Category
 
     public function getAll(): array
     {
-        $sql = "SELECT id, name, navigation
+        $sql = "SELECT id, name, navigation, seo_name
                 FROM category";
 
         return $this->db->runSQL($sql)->fetchAll();
@@ -37,8 +37,8 @@ class Category
     public function create(array $category): bool
     {
         try {
-            $sql = "INSERT INTO category (name, description, navigation)
-                    VALUES (:name, :description, :navigation)";
+            $sql = "INSERT INTO category (name, description, navigation, seo_name)
+                    VALUES (:name, :description, :navigation, :seo_name)";
 
             $this->db->runSQL($sql, $category);
             return true;
@@ -58,7 +58,8 @@ class Category
             $sql = "UPDATE category
                     SET name = :name,
                         description = :description,
-                        navigation = :navigation
+                        navigation = :navigation,
+                        seo_name = :seo_name
                     WHERE id = :id";
 
             $this->db->runSQL($sql, $category);

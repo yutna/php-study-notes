@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 if ($cms->getSession()->id === 0) {
-    redirect('login.php');
+    redirect('login/');
 }
 
 $article = [];
@@ -16,17 +14,15 @@ $temp = $_FILES['image']['tmp_name'] ?? '';
 $destination = '';
 $saved = null;
 
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 if ($id) {
     $article = $cms->getArticle()->get($id);
 
     if (!$article) {
-        include APP_ROOT . '/public/page-not-found.php';
+        include APP_ROOT . '/src/pages/page-not-found.php';
     }
 
     if ($article['member_id'] !== $cms->getSession()->id) {
-        include APP_ROOT . '/public/page-not-found.php';
+        include APP_ROOT . '/src/pages/page-not-found.php';
     }
 }
 
@@ -82,14 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($id) {
             $saved = $cms->getArticle()->update($article, $temp, $destination);
         } else {
-            var_dump($article);
-            var_dump($temp);
-            var_dump($destination);
             $saved = $cms->getArticle()->create($article, $temp, $destination);
         }
 
         if ($saved) {
-            redirect('member.php', ['id' => $cms->getSession()->id]);
+            redirect('member/' . $cms->getSession()->id . '/');
         } else {
             $errors['message'] = 'Article title already in use';
         }

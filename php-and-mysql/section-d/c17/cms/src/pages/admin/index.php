@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require '../../src/bootstrap.php';
-
 is_admin($session->role);
 
 $data['article_count'] = $cms->getArticle()->count();

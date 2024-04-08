@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require '../src/bootstrap.php';
-
 $term = filter_input(INPUT_GET, 'term');
 $show = filter_input(INPUT_GET, 'show', FILTER_VALIDATE_INT) ?? 3;
 $from = filter_input(INPUT_GET, 'from', FILTER_VALIDATE_INT) ?? 0;

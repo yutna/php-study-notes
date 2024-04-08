@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../src/bootstrap.php';
-
 $errors = [];
 $token = $_GET['token'] ?? '';
 
 if (!$token) {
-    redirect('login.php');
+    redirect('login/');
 }
 
 $id = $cms->getToken()->getMemberId($token, 'password_reset');
 
 if (!$id) {
-    redirect('login.php', ['warning' => 'Link expired, try again.']);
+    redirect('login/', ['warning' => 'Link expired, try again.']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $body = 'Your password was updated on ' . date('Y-m-d H:i:s') . ' - if your did not reset the password, email ' . $email_config['admin_email'];
         $email = new \PhpBook\Email\Email($email_config);
         $email->sendEmail($email_config['admin_email'], $member['email'], $subject, $body);
-        redirect('login.php', ['success' => 'Password updated']);
+        redirect('login/', ['success' => 'Password updated']);
     }
 }
 

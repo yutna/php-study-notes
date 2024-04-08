@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../../src/bootstrap.php';
-
 is_admin($session->role);
 
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $temp = $_FILES['image']['tmp_name'] ?? '';
 $destination = '';
 $saved = null;
@@ -41,7 +38,7 @@ if ($id) {
     $article = $cms->getArticle()->get($id, false);
 
     if (!$article) {
-        redirect('articles.php', ['failure' => 'Article not found']);
+        redirect('admin/articles/', ['failure' => 'Article not found']);
     }
 }
 
@@ -76,6 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $article['member_id'] = $_POST['member_id'];
     $article['category_id'] = $_POST['category_id'];
     $article['published'] = isset($_POST['published']) && ($_POST['published'] == 1) ? 1 : 0;
+    $article['seo_title'] = create_seo_name($article['title']);
+
+    $purifier = new \HTMLPurifier();
+    $purifier->config->set('HTML.Allowed', 'p,br,b,i,a[href],img[src|alt]');
+    $article['content'] = $purifier->purify($article['content']);
 
     $errors['title'] = Validate::isText($article['title'], 1, 80) ? '' : 'Title mush be 1-80 characters';
     $errors['summary'] = Validate::isText($article['summary'], 1, 254) ? '' : 'Summary must be 1-254 characters';
@@ -98,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($saved) {
-            redirect('articles.php', ['success' => 'Article saved']);
+            redirect('admin/articles/', ['success' => 'Article saved']);
         } else {
             $errors['warning'] = 'Article title already in use';
         }

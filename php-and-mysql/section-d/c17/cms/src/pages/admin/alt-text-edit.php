@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 use PhpBook\Validate\Validate;
 
-require '../../src/bootstrap.php';
-
 is_admin($session->role);
-
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 $article = [];
 $errors = [
@@ -17,13 +13,13 @@ $errors = [
 ];
 
 if (!$id) {
-    redirect('articles.php', ['failure' => 'Article not found']);
+    redirect('admin/articles/', ['failure' => 'Article not found']);
 }
 
 $article = $cms->getArticle()->get($id, false);
 
 if (!$article['image_file']) {
-    redirect('article.php', ['id' => $id]);
+    redirect('admin/article/' . $id . '/');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -34,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['warning'] = 'Please correct error below';
     } else {
         $cms->getArticle()->altUpdate($article['image_id'], $article['image_alt']);
-        redirect('article.php', ['id' => $id]);
+        redirect('admin/article/' . $id . '/');
     }
 }
 

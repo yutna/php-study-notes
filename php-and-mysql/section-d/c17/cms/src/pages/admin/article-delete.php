@@ -2,21 +2,18 @@
 
 declare(strict_types=1);
 
-require '../../src/bootstrap.php';
-
 is_admin($session->role);
 
 $deleted = null;
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
-    redirect('articles.php', ['failure' => 'Article not found']);
+    redirect('admin/articles/', ['failure' => 'Article not found']);
 }
 
 $article = $cms->getArticle()->get($id, false);
 
 if (!$article) {
-    redirect('articles.php', ['failure' => 'Article not found']);
+    redirect('admin/articles/', ['failure' => 'Article not found']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -28,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $deleted = $cms->getArticle()->delete($id);
 
     if ($deleted) {
-        redirect('articles.php', ['success' => 'Article deleted']);
+        redirect('admin/articles/', ['success' => 'Article deleted']);
     } else {
         throw new Exception('Unable to delete article');
     }
