@@ -7,6 +7,8 @@ class CMS
     protected $db = null;
     protected $article = null;
     protected $category = null;
+    protected $comment = null;
+    protected $like = null;
     protected $member = null;
     protected $session = null;
     protected $token = null;
@@ -32,6 +34,24 @@ class CMS
         }
 
         return $this->category;
+    }
+
+    public function getComment()
+    {
+        if ($this->comment === null) {
+            $this->comment = new Comment($this->db);
+        }
+
+        return $this->comment;
+    }
+
+    public function getLike()
+    {
+        if ($this->like === null) {
+            $this->like = new Like($this->db);
+        }
+
+        return $this->like;
     }
 
     public function getMember()

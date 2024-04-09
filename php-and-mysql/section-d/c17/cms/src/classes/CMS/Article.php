@@ -19,7 +19,13 @@ class Article
                        CONCAT(m.forename, ' ', m.surname) AS author,
                        i.id AS image_id,
                        i.file AS image_file,
-                       i.alt AS image_alt
+                       i.alt AS image_alt,
+                       (SELECT COUNT(article_id)
+                        FROM likes
+                        WHERE likes.article_id = a.id) AS likes,
+                       (SELECT COUNT(article_id)
+                        FROM comment
+                        WHERE comment.article_id = a.id) AS comments
                 FROM article AS a
                 JOIN category AS c ON a.category_id = c.id
                 JOIN member AS m ON a.member_id = m.id
@@ -46,7 +52,13 @@ class Article
                        c.seo_name AS seo_category,
                        CONCAT(m.forename, ' ', m.surname) AS author,
                        i.file AS image_file,
-                       i.alt AS image_alt
+                       i.alt AS image_alt,
+                       (SELECT COUNT(article_id)
+                        FROM likes
+                        WHERE likes.article_id = a.id) AS likes,
+                       (SELECT COUNT(article_id)
+                        FROM comment
+                        WHERE comment.article_id = a.id) AS comments
                 FROM article AS a
                 JOIN category AS c ON a.category_id = c.id
                 JOIN member AS m ON a.member_id = m.id
@@ -92,7 +104,13 @@ class Article
                        c.seo_name AS seo_category,
                        CONCAT(m.forename, ' ', m.surname) AS author,
                        i.file AS image_file,
-                       i.alt AS image_alt
+                       i.alt AS image_alt,
+                       (SELECT COUNT(article_id)
+                        FROM likes
+                        WHERE likes.article_id = a.id) AS likes,
+                       (SELECT COUNT(article_id)
+                        FROM comment
+                        WHERE comment.article_id = a.id) AS comments
                 FROM article AS a
                 JOIN category AS c ON a.category_id = c.id
                 JOIN member AS m ON a.member_id = m.id

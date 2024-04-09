@@ -7,6 +7,17 @@
                 <img alt="Placeholder image" src="{{ doc_root }}/uploads/blank.png">
             {% endif %}
 
+            <div class="social">
+                <div class="like-count">
+                    <span class="icon-heart-empty"></span>
+                    {{ article.likes }}
+                </div>
+                <div class="comment-count">
+                    <span class="icon-comment"></span>
+                    {{ article.comments }}
+                </div>
+            </div>
+
             <h2>{{ article.title }}</h2>
             <p>{{ article.summary }}</p>
         </a>
