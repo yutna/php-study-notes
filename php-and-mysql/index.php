@@ -1,10 +1,12 @@
+<?php require_once '../contents/php-and-mysql.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Playground</title>
+    <title>PHP &amp; MySQL: Server-side Web Development</title>
     <style>
         body {
             color: white;
@@ -27,16 +29,7 @@
 </head>
 
 <body>
-    <main>
-        <h1>Books</h1>
-        <ul>
-            <li>
-                <a href="php-and-mysql/index.php" target="_blank">
-                    PHP &amp; MySQL: Server-side Web Development
-                </a>
-            </li>
-        </ul>
-    </main>
+    <?= get_php_and_mysql_contents() ?>
 </body>
 
 </html>

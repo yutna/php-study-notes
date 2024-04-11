@@ -263,7 +263,7 @@ $php_and_mysql_data = [
                 'title' => 'Chapter 17: Adding Functionality',
                 'folder_name' => 'c17',
                 'pages' => [
-                    'cms/public/index.php',
+                    'cms/public',
                 ],
             ]
         ],
