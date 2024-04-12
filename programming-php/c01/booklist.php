@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli('localhost', 'dev', 'secret', 'library');
+$db = new mysqli('127.0.0.1', 'dev', 'secret', 'library');
 
 if ($db->connect_error) {
     die("Connect Error ({$db->connect_errno}) {$db->connect_error}");
