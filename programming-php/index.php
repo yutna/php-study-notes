@@ -74,7 +74,7 @@ function list_all_files($path)
                 <?php $files = list_all_files($chapter) ?>
                 <?php foreach ($files as $file) { ?>
                     <li>
-                        <a href="<?= basename($chapter) . '/' . $file ?>">
+                        <a href="<?= basename($chapter) . '/' . $file ?>" target="_blank">
                             <?= $file ?>
                         </a>
                     </li>
