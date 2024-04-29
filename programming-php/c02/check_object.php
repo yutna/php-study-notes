@@ -23,5 +23,5 @@ $tc->name('Crapper');
 echo "Look out below {$tc->name} <br />";
 
 if (is_object($ed)) {
-    echo "ed is an object";
+    echo "ed is an object"; // print this statement
 }

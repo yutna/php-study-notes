@@ -9,7 +9,7 @@ function updateCounter()
 }
 
 $counter = 10;
-updateCounter();
-updateCounter();
+updateCounter(); // Static counter is now 1
+updateCounter(); // Static counter is now 2
 
-echo "Global counter is {$counter}";
+echo "Global counter is {$counter}"; // Global counter is 10

@@ -9,4 +9,4 @@ function updateCounter()
 $counter = 10;
 updateCounter();
 
-echo $counter;
+echo $counter; // 10

@@ -8,7 +8,7 @@ function foo()
 }
 
 foo();
-echo $a;
+echo $a; // 3
 
 // $a ใน function มี scope แค่ใน function
 // variable ที่ประกาศนอก function โดยปกติแล้วจะไม่สามารถ access ได้เหมือนอย่าง JavaScript

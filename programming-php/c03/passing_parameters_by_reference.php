@@ -8,4 +8,4 @@ function doubler(&$value)
 $a = 3;
 doubler($a);
 
-echo $a;
+echo $a; // 6

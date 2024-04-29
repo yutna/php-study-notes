@@ -11,7 +11,7 @@ function foo()
 }
 
 foo();
-echo $a;
+echo $a; // 5
 
 echo "<br />------------------------------------<br />";
 
@@ -24,4 +24,4 @@ function bar()
 }
 
 bar();
-echo $var;
+echo $var; // 12

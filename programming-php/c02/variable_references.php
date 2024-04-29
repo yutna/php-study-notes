@@ -3,21 +3,21 @@
 $bigLongVariableName = "PHP";
 $short = &$bigLongVariableName;
 $bigLongVariableName .= " rocks!";
-print "\$short is $short <br />";
-print "Long is $bigLongVariableName";
+print "\$short is $short <br />"; // $short is PHP rock!
+print "Long is $bigLongVariableName"; // Long is PHP rock!
 
 print "<br />";
 
 $short = "Programming $short";
-print "\$short is $short <br />";
-print "Long is $bigLongVariableName";
+print "\$short is $short <br />"; // $short is Programming PHP rock!
+print "Long is $bigLongVariableName"; // Long is Programming PHP rock!
 
 print "<br />";
 
 $white = "snow";
 $black = &$white;
 unset($white);
-print $black;
+print $black; // snow
 
 print "<br />";
 
@@ -28,4 +28,4 @@ function &retRef()
 }
 
 $v = &retRef();
-print $v;
+print $v; // PHP

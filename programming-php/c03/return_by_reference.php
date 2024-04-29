@@ -11,4 +11,4 @@ function &find_one($n)
 $person = &find_one(1);
 $person = "Barnetta"; // changes $names[1];
 
-var_dump($names);
+var_dump($names); // ["Fred", "Barnetta", "Wilma", "Betty"]

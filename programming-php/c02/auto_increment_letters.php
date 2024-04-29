@@ -2,20 +2,20 @@
 
 $a = "a";
 $a++;
-echo $a . "<br />";
+echo $a . "<br />"; // b
 
 $z = "z";
 $z++;
-echo $z . "<br />";
+echo $z . "<br />"; // aa
 
 $spaz = "spaz";
 $spaz++;
-echo $spaz . "<br />";
+echo $spaz . "<br />"; // spba
 
 $k9 = "K9";
 $k9++;
-echo $k9 . "<br />";
+echo $k9 . "<br />"; // L0
 
 $n = "42";
 $n++;
-echo $n . "<br />";
+echo $n . "<br />"; // 43
