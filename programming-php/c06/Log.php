@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 class Log
 {
-    private $filename;
-    private $fh;
+    public const LOG_FILE_PATH = __DIR__ . DIRECTORY_SEPARATOR . 'log.txt';
 
-    function __construct($filename)
+    public string $filename;
+    public $fh;
+
+    public function __construct()
     {
-        $this->filename = $filename;
+        $this->filename = self::LOG_FILE_PATH;
         $this->open();
     }
 
-    function open()
+    public function open()
     {
         $this->fh = fopen($this->filename, 'a') or die("Can't open {$this->filename}");
     }
@@ -26,15 +30,15 @@ class Log
         return join('', file($this->filename));
     }
 
-    function __wakeup(array $data): void
+    function __wakeup()
     {
-        $this->filename = $data['filename'];
+        $this->filename = self::LOG_FILE_PATH;
         $this->open();
     }
 
     function __sleep()
     {
         fclose($this->fh);
-        return ["filename" => $this->filename];
+        return array('filename');
     }
 }
