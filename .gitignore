@@ -77,4 +77,5 @@ php-and-mysql/section-b/c07/uploads/
 php-and-mysql/section-d/**/vendor/
 php-and-mysql/section-d/**/tmp/cache/
 *.env
-
+programming-php/c09/library.sqlite
+programming-php/c09/surveys
