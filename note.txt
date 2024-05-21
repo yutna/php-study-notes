@@ -1,4 +1,0 @@
-Add these custom configurations to your `php.ini`.
---------------------------------------------------------------------------------
-session.save_path=/<path>/Server/sessions
-upload_tmp_dir=/<path>/Server/uploads

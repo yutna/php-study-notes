@@ -31,16 +31,19 @@
         <h1>Books</h1>
         <ul>
             <li>
-                <a href="php-and-mysql/index.php" target="_blank">
+                <a href="php-and-mysql/index.php">
                     PHP &amp; MySQL: Server-side Web Development
                 </a>
             </li>
             <li>
-                <a href="programming-php/index.php" target="_blank">
+                <a href="programming-php/index.php">
                     Programming PHP: Creating Dynamic Web Pages
                 </a>
             </li>
         </ul>
+
+        <h2>Playground</h2>
+        <a href="program.php">PHP Playground</a>
     </main>
 </body>
 
