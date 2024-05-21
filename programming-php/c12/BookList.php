@@ -6,6 +6,8 @@ class BookList
     const FIELD_TYPE_ARRAY = 2;
     const FIELD_TYPE_CONTAINER = 3;
 
+    // RECHECK: ไม่เห็นมีในหนังสือเลย โดยเฉพาะบท OOP
+    // มันเป็น style การเขียน syntax แบบเก่าของ PHP หรอ 🤔
     var $parser;
     var $record;
     var $currentField = '';
@@ -22,7 +24,7 @@ class BookList
         $this->fieldType = array(
             'title' => self::FIELD_TYPE_SINGLE,
             'author' => self::FIELD_TYPE_ARRAY,
-            'lsbn' => self::FIELD_TYPE_SINGLE,
+            'isbn' => self::FIELD_TYPE_SINGLE,
             'comment' => self::FIELD_TYPE_SINGLE
         );
 
@@ -38,7 +40,7 @@ class BookList
     {
         $element = strtolower($element);
 
-        if ($this->fieldType[$element] !== 0) {
+        if (array_key_exists($element, $this->fieldType)) {
             $this->currentField = $element;
         } else {
             $this->currentField = '';
@@ -49,7 +51,7 @@ class BookList
     {
         $element = strtolower($element);
 
-        if ($this->endsRecord[$element]) {
+        if (array_key_exists($element, $this->endsRecord)) {
             $this->records[] = $this->record;
             $this->record = array();
         }
@@ -59,12 +61,15 @@ class BookList
 
     function handleCdata($parser, $text)
     {
-        switch ($this->fieldType[$this->currentField]) {
-            case self::FIELD_TYPE_SINGLE:
-                $this->record[$this->currentField] .= $text;
-                break;
-            case self::FIELD_TYPE_ARRAY:
-                $this->record[$this->currentField][] = $text;
+        if (array_key_exists($this->currentField, $this->fieldType)) {
+            switch ($this->fieldType[$this->currentField]) {
+                case self::FIELD_TYPE_SINGLE:
+                    $this->record[$this->currentField] = $text;
+                    break;
+                case self::FIELD_TYPE_ARRAY:
+                    $this->record[$this->currentField][] = $text;
+                    break;
+            }
         }
     }
 
@@ -96,7 +101,7 @@ class BookList
     function showBook($isbn)
     {
         foreach ($this->records as $book) {
-            if (!$book['isbn'] !== $isbn) {
+            if ($book['isbn'] !== $isbn) {
                 continue;
             }
 

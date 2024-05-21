@@ -372,5 +372,4 @@ if (list($parser, $file_handler) = create_parser("bookstore.xml")) {
 
 // -----------------------------------------------------------------------------
 
-// ให้ดูตัวอย่างในไฟล์ bookparse.php เอา แต่ว่าตัวอย่างไม่สมบูรณ์นะ มี error แต่ก็พอดูเพื่อเป็น idea
-// เอาไปใช้ implement ในอนาคตได้
+// ดูตัวอย่างการใช้งานแบบ event-based library ในไฟล์ bookparse.php กับไฟล์ BookList.php
