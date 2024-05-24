@@ -43,7 +43,7 @@
         </ul>
 
         <h2>Playground</h2>
-        <a href="program.php">PHP Playground</a>
+        <a href="playground.php">PHP Playground</a>
     </main>
 </body>
 
