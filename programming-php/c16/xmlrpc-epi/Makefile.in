@@ -1,0 +1,10 @@
+# $Id: Makefile.in,v 1.1.1.1 2001/04/03 06:03:46 danda Exp $
+
+LTLIBRARY_NAME        = libxmlrpc-epi-php.la
+LTLIBRARY_SOURCES     = xmlrpc-epi-php.c
+LTLIBRARY_SHARED_NAME = xmlrpc-epi-php.la
+EXTRA_INCLUDES = -I$(XMLRPC_INC_DIR)
+LTLIBRARY_LIBADD  = $(XMLRPC_LIBADD)
+LTLIBRARY_SHARED_LIBADD  = $(XMLRPC_SHARED_LIBADD)
+
+include $(top_srcdir)/build/dynlib.mk

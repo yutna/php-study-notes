@@ -1,0 +1,5 @@
+.deps
+xmlrpc.lo
+.libs
+libxmlrpc.la
+Makefile

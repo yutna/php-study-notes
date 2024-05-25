@@ -1,0 +1,33 @@
+New in 0.51
+ - Added xmlrpc_is_fault() function
+ - New curl functions (in samples/utils) for transport via SSL
+ - merged in latest mods for php cvs.  builds with php 4.2.1 now. (and hopefully on windows)
+ 
+New in 0.50
+ - EXPERIMENTAL support for SOAP 1.1
+ - xmlrpc_server_method_call: optionally auto reply in same protocol as request
+ - use real null type instead of base64. encoded as <string/> in xml-rpc vocab.
+ - bug fix: xmlrpc_server_method_call: parse errors propogated to response.
+ - added SOAP support (minimal) in sample clients. (interop*)
+
+New in 0.41
+ - fix garbage when system.* call returns null
+ - xmlrpc_encode_request can send a methodResponse if method is null
+ - xmlrpc_get_type() returns vector types (struct, array, mixed)
+ - add xmlrpc_decode_request so people can extract methodname without having to call server
+ - php code to emulate useful inc API.
+ - moved util files under sample/utils
+ - support for http authentication in xu_rpc_http(), xu_query_http_post()
+ - prelim support for libcurl ssl transport. untested.
+ - added xu_is_fault()
+
+New in 0.40:
+ - re-wrote introspection api.  now supports xml based method descriptions ala javadoc. 
+ - introspection callbacks so no documentation is generated until actually requested.
+ - more system methods supported by C library
+ - standard fault codes supported by C library
+ - updated some of the samples
+ - bug fix: support for PHP 4.0.5 API change that was breaking the build
+ - bug fix: base64/datetime functions were not working correctly.  re-wrote set/gettype() to
+   use objects instead of strings. Note that this is an API change.
+ 

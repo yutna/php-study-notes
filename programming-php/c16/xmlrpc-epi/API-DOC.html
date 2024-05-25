@@ -1,0 +1,127 @@
+<!-- API-DOC.html is generated from API-DOC.php.  Do not edit the html file directly --><html><head><title>xmlrpc-epi-php API reference</title></head><body><center><h1>contents</h1></center><h1><a href='#encoding'>request (de)serialization</a></h1><ul><li><a href='#xmlrpc_encode_request'>xmlrpc_encode_request</a>
+<li><a href='#xmlrpc_decode_request'>xmlrpc_decode_request</a>
+<li><a href='#xmlrpc_encode'>xmlrpc_encode</a>
+<li><a href='#xmlrpc_decode'>xmlrpc_decode</a>
+</ul>
+<h1><a href='#server'>server</a></h1><ul><li><a href='#xmlrpc_server_create'>xmlrpc_server_create</a>
+<li><a href='#xmlrpc_server_destroy'>xmlrpc_server_destroy</a>
+<li><a href='#xmlrpc_server_register_method'>xmlrpc_server_register_method</a>
+<li><a href='#xmlrpc_server_call_method'>xmlrpc_server_call_method</a>
+<li><a href='#xmlrpc_server_set_method_description'>xmlrpc_server_set_method_description</a>
+</ul>
+<h1><a href='#introspection'>introspection</a></h1><ul><li><a href='#xmlrpc_server_register_introspection_callback'>xmlrpc_server_register_introspection_callback</a>
+<li><a href='#xmlrpc_parse_method_descriptions'>xmlrpc_parse_method_descriptions</a>
+<li><a href='#xmlrpc_server_add_introspection_data'>xmlrpc_server_add_introspection_data</a>
+</ul>
+<h1><a href='#types'>type manipulation</a></h1><ul><li><a href='#xmlrpc_set_type'>xmlrpc_set_type</a>
+<li><a href='#xmlrpc_get_type'>xmlrpc_get_type</a>
+<li><a href='#xmlrpc_is_fault'>xmlrpc_is_fault</a>
+</ul>
+<h1><a href='#data'>data structures</a></h1><ul><li><a href='#xmlrpc_type'>xmlrpc_type</a>
+<li><a href='#output_options'>output_options</a>
+</ul><center><h1>API Reference</h1></center><h1><a name='encoding'>request (de)serialization</a></h1><p>these functions are used to convert between php native data types and the xml vocabulary in either direction. these, plus a network request function, are all that are required for a simple xmlrpc client</p><blockquote> <h3><a name='xmlrpc_encode_request'>string xmlrpc_encode_request(string method, mixed params [, array output_options])</a></h3>
+ <blockquote>
+ generate xml for a method call or response
+ <p>
+ <b>returns:</b> generated xml string or false on failure
+ <p><b>args:</b></br><blockquote><b>method:</b> method to call on remote server. if null, generated xml is a response<br><b>params:</b> argument data of any type. should match remote method signature<br><b>output_options:</b> see <a href='#output_options'>output_options</a><br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_decode_request'>string xmlrpc_decode_request(string method, string& method [, encoding])</a></h3>
+ <blockquote>
+ decode xml into native php types. also returns methodname
+ <p>
+ <b>returns:</b> a single value of any type.  usually an array.
+ <p><b>args:</b></br><blockquote><b>xml:</b> raw xml to decode<br><b>method:</b> variable to store method name in. (pass by ref). unchanged if not a method call<br><b>encoding:</b> input encoding to translate to.  defaults to iso-8859-1<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_encode'>string xmlrpc_encode(mixed value)</a></h3>
+ <blockquote>
+ generate xml for a value, sans <method[Call|Response]>
+ <p>
+ <b>returns:</b> generated xml string or false on failure
+ <p><b>args:</b></br><blockquote><b>value:</b> php value to be serialized<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_decode'>mixed xmlrpc_decode(string xml [,string encoding])</a></h3>
+ <blockquote>
+ decode xml into native php types
+ <p>
+ <b>returns:</b> a single value of any type.  usually an array.
+ <p><b>args:</b></br><blockquote><b>xml:</b> raw xml to decode<br><b>encoding:</b> input encoding to translate to.  defaults to iso-8859-1<br></blockquote><br><br></blockquote>
+</blockquote>
+<h1><a name='server'>server</a></h1><p>these functions are provided to enable easy creation of an xmlrpc server. basically, a server, once created, will register user methods and then process requests. the requests are in the form of raw xml data that can be passed directly to xmlrpc_server_call_method, which will call a previously registered user method and return the result.</p><blockquote> <h3><a name='xmlrpc_server_create'>handle xmlrpc_server_create()</a></h3>
+ <blockquote>
+ create an xml server
+ <p>
+ <b>returns:</b> a handle to a newly created server or false on failure
+ <p><br><br></blockquote>
+ <h3><a name='xmlrpc_server_destroy'>void xmlrpc_server_destroy(handle server)</a></h3>
+ <blockquote>
+ destroy server resources. it is good practice to call this function however if you do not, the server will be destroyed at the end of the request regardless.
+ <p>
+ <b>returns:</b> void
+ <p><b>args:</b></br><blockquote><b>handle:</b> handle to a server created with xmlrpc_server_create<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_server_register_method'>int xmlrpc_server_register_method(handle server, string method_name, string function)</a></h3>
+ <blockquote>
+ register a php function to handle method matching method_name 
+ <p>
+ <b>returns:</b> true, or false on failure
+ <p><b>args:</b></br><blockquote><b>handle:</b> handle to a server created with xmlrpc_server_create<br><b>method_name:</b> public (xmlrpc) method name<br><b>function:</b> name of application (php) function that will implement the method<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_server_call_method'>mixed xmlrpc_server_call_method(handle server, string xml, mixed user_data [, array output_options])</a></h3>
+ <blockquote>
+ parse xml request and call method 
+ <p>
+ <b>returns:</b> result of method call. this will either be a php value, or an xml encoded representation of that value, depending on output_options
+ <p><b>args:</b></br><blockquote><b>handle:</b> handle to a server created with xmlrpc_server_create<br><b>xml:</b> raw xml request string<br><b>user_data:</b> any data the application needs to pass to the method handler function<br><b>output_options:</b> see <a href='#output_options'>output_options</a><br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_server_set_method_description'>int xmlrpc_server_set_method_description(handle server, string method, struct description)</a></h3>
+ <blockquote>
+ set method description for a method
+ <p>
+ <b>returns:</b> 1 if success.  0 otherwise
+ <p><b>args:</b></br><blockquote><b>handle:</b> handle to a server created with xmlrpc_server_create<br><b>method:</b> name of method being described<br><b>description:</b> a method description, as defined by the system.describeMethods <a href='http://xmlrpc-epi.sourceforge.net/system.describeMethods.php'>spec</a><br></blockquote><br><br></blockquote>
+</blockquote>
+<h1><a name='introspection'>introspection</a></h1><p>it is important to have good documentation for any public API.  the introspection functions enable server developers to generate highly descriptive documentation describing methods and their parameter types using a simple XML vocabulary. further, a callback mechanism is provided because documentation generation can be expensive and thus should only be done on demand, particularly in php's interpreted per request environment.</p><blockquote> <h3><a name='xmlrpc_server_register_introspection_callback'>int xmlrpc_server_register_introspection_callback(handle server, string function)</a></h3>
+ <blockquote>
+ register a php function to generate documentation when it is requested (lazy evaluation). this is more efficient and should be used in preference to the parse/add methods. the user function simply needs to return xml conforming to the introspection spec, and it will automatically be parsed, registered with the server and returned to the client as appropriate
+ <p>
+ <b>returns:</b> true, or false on failure
+ <p><b>args:</b></br><blockquote><b>handle:</b> handle to a server created with xmlrpc_server_create<br><b>function:</b> name of application (php) function that will implement the method. function signature is:<br>  string func(mixed user_data)<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_parse_method_descriptions'>array xmlrpc_parse_method_descriptions(string xml)</a></h3>
+ <blockquote>
+ parse xml into a method description. See the <a href='http://xmlrpc-epi.sourceforge.net/specs/rfc.system.describeMethods.php'>introspection spec</a> for a description of the xml vocabulary
+ <p>
+ <b>returns:</b> an array suitable for use with xmlrpc_server_add_introspection_data, or null if failure
+ <p><b>args:</b></br><blockquote><b>xml:</b> xml conforming to introspection spec<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_server_add_introspection_data'>bool xmlrpc_server_add_introspection_data(handle server, array desc)</a></h3>
+ <blockquote>
+ adds introspection data to a server for future use
+ <p>
+ <b>returns:</b> bool.  true if successful
+ <p><b>args:</b></br><blockquote><b>handle:</b> handle to a server created with xmlrpc_server_create<br><b>desc:</b> a description created with xmlrpc_parse_method_description<br></blockquote><br><br></blockquote>
+</blockquote>
+<h1><a name='types'>type manipulation</a></h1><p>these functions are provided because of the unique implementation of the base64 and datetime data types.  neither of these types are native to php, so it is necessary to store and retrieve that meta information somehow. This second implementation achievesthis by converting the value to a php object and storing type information in a member</p><blockquote> <h3><a name='xmlrpc_set_type'>bool xmlrpc_set_type(string &value, string type)</a></h3>
+ <blockquote>
+ set xmlrpc type, base64 or datetime, for a php string value. if successful, the string will be converted to an object. the object will have a member 'xmlrpc_type', which contains the new type, and a member 'scalar', which contains the actual value
+ <p>
+ <b>returns:</b> true, or false on failure
+ <p><b>args:</b></br><blockquote><b>value:</b> a reference to a string. typically containing either base64 or an iso 8601 conforming date.<br><b>type:</b> a string. one of the <a href='#xmlrpc_type'>allowed types</a><br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_get_type'>string xmlrpc_get_type(mixed value)</a></h3>
+ <blockquote>
+ get xmlrpc type for a php value. especially useful for base64 and datetime strings which do not have php type equivalents.
+ <p>
+ <b>returns:</b> a string indicating the value's xmlrpc type. see <a href='#types'>types</a>
+ <p><b>args:</b></br><blockquote><b>value:</b> value to determine type of<br></blockquote><br><br></blockquote>
+ <h3><a name='xmlrpc_is_fault'>bool xmlrpc_is_fault(array value)</a></h3>
+ <blockquote>
+ check if a returned value is a fault
+ <p>
+ <b>returns:</b> true if value is a fault, false otherwise
+ <p><b>args:</b></br><blockquote><b>value:</b> array value to query<br></blockquote><br><br></blockquote>
+</blockquote>
+<h1><a name='data'>data structures</a></h1><h3><a name='xmlrpc_type'>xmlrpc_type</a></h3><blockquote><b>type: defines</b><br><br><b>values:</b><blockquote><b>none:</b> not a value<br><br><b>empty:</b> value created but not set, or null.<br><br><b>base64:</b> base64 encoded string, usually for sending binary data<br><br><b>boolean:</b> true or false<br><br><b>datetime:</b> iso 8601 encoded date/time string<br><br><b>double:</b> floating point value<br><br><b>int:</b> integer<br><br><b>string:</b> a string<br><br><b>array:</b> an array<br><br><b>struct:</b> a struct<br><br></blockquote></blockquote><h3><a name='output_options'>output_options</a></h3><blockquote><b>type: hashed array</b><br>sets xml generation options.  any values not set will use defaults<br><br><b>values:</b><blockquote><b>output_type:</b> return data as either <i>php</i> native data types or <i>xml</i> encoded. if<i>php</i> is used, then the other values are ignored. default = <i>xml</i><br><br><b>verbosity:</b> determine compactness of generated xml. options are <i>no_white_space</i>, <i>newlines_only</i>, and <i>pretty</i>.  default = <i>pretty</i><br><br><b>escaping:</b> determine how/whether to escape certain characters. 1 or more values are allowed.  If multiple, they need to be specified as a sub-array. options are: <i>cdata</i>, <i>non-ascii</i>, <i>non-print</i>, and <i>markup</i>.default = <i>non-ascii, non-print, markup</i><br><br><b>version:</b> version of xml vocabulary to use.  currently, three are supported: <i>xmlrpc</i>, <i>soap 1.1</i>, and <i>simple</i>. The keyword <i>auto</i> is also recognized to mean respond in whichever version the request came in. default = <i>auto</i> (when applicable), <i>xmlrpc</i><br><br><b>encoding:</b> the encoding that the data is in.  Since PHP defaults to iso-8859-1 you will usually want to use that. Change it if you know what you are doing. default=<i>iso-8859-1</i><br><br></blockquote><h3>example usage</h3><xmp>
+$output_options = array(
+                       "output_type" => "xml",
+                       "verbosity" => "pretty",
+                       "escaping" => array("markup", "non-ascii", "non-print"),
+                       "version" => "xmlrpc",
+                       "encoding" => "utf-8"
+                      );
+or
+
+$output_options = array("output_type" => "php");
+</xmp></blockquote></html>

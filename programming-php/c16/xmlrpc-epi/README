@@ -1,0 +1,54 @@
+xmlrpc-epi-php
+
+This library is a PHP C extension that utilizes xmlrpc-epi to provide
+a high performance, easy to use, php native interface to xmlrpc. It also
+provides experimental support for SOAP v 1.1.
+
+Key benefits of using this extension as compared to other php xmlrpc 
+solutions are:
+
+1) speed.  
+
+Because it is in C, it is faster than implementations written in php.
+
+2) ease of use. 
+
+All data is sent/received as native php types, so there is no complicated 
+new API to learn when dealing with data types.
+
+3) escaping and encoding support.  
+
+four different types of xml character escaping are available, which means you can
+safely send any sort of data, even non-printable and "illegal" xml characters.
+all encodings supported by your operating system are useable.
+
+4) pretty printing
+
+xml may be printed in 3 different ways to optimize for bandwidth efficiency or
+human readability.
+
+5) RPC Protocol Independence
+
+The library currently speaks XML-RPC and a simpler non-standard protocol. 
+New! There is also experimental support for SOAP 1.1.  All of these are 
+accessed via the same application API.
+ 
+
+This library has been demonstrated fully compliant with the XMLRPC spec,
+having passed the test suite at http://validator.xmlrpc.com.
+
+Various iterations of this code have been/are running at 
+Epinions.com and are sufficiently fast for the high traffic volume this 
+site encounters, with several xmlrpc type requests generated for each user 
+http request.  No specific speed claims are made.  Your mileage may vary.
+
+Sample php scripts are in ./sample.  The best/quickest way to learn
+how to use the library is just to view the source to these and load 
+them in your browser
+
+It is the author's hope that this code will be found useful by someone, 
+and would like to hear about how and where it is being used, or 
+suggestions for improvement.  
+
+Signed
+Dan Libby <dan@libby.com>, Epinions.com, Inc.
