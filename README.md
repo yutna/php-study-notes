@@ -6,7 +6,7 @@ and records that I have kept.
 
 ## Prerequisite
 
-I use these tools when practicing Java. If you need to run any file examples in
+I use these tools when practicing PHP. If you need to run any file examples in
 this project, please ensure that these tools are installed before you begin.
 
 - [Herd][1]
