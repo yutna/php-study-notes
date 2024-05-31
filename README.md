@@ -15,7 +15,7 @@ this project, make sure to install these tools before you begin.
 - [VS Code][4]
 - [PHP Intelephense][5]
 
-## Setup
+## Configuration
 
 These are optional settings. For learning purposes and easier investigation of
 sessions and uploaded files, try adding these custom configurations to your
