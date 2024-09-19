@@ -7,9 +7,10 @@ methodologies from books and various online materials.
 
 ## Overview
 
-This repository is intended as a personal archive for PHP programming
-exercises and code examples. You’ll find practical code snippets, testing
-framework usages, and various testing techniques I’ve explored.
+This repository serves as a personal archive for learning PHP programming. It 
+includes a collection of PHP exercises, code examples, and projects that I have 
+worked on. You’ll find practical code snippets, implementations of various PHP 
+features, and testing techniques that I’ve explored throughout my learning journey.
 
 ## Prerequisite
 
