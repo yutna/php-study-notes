@@ -1,13 +1,20 @@
-# PHP Playground
+# PHP Study Notes
 
-Here is a repository for storing examples and exercises done while studying PHP.
-Besides serving as a backup, it is also used as a reference or to revisit notes
-and records that I have kept.
+Welcome to the **PHP Study Notes** repository! This collection
+includes code practices, examples, and notes related to PHP programming language.
+It encompasses exercises and projects that I’ve worked on while learning testing
+methodologies from books and various online materials.
+
+## Overview
+
+This repository is intended as a personal archive for PHP programming
+exercises and code examples. You’ll find practical code snippets, testing
+framework usages, and various testing techniques I’ve explored.
 
 ## Prerequisite
 
-I use these tools when practicing PHP. If you need to run any file examples in
-this project, please ensure that these tools are installed before you begin.
+Before diving into the code and examples, ensure you have the following tools
+and dependencies installed:
 
 - [Herd][1]
 - [MySQL Community Edition][2]
@@ -31,8 +38,7 @@ upload_tmp_dir=/<path>/Server/uploads
 
 ## Book references
 
-Here is a list of my readings, along with examples and exercises I have
-completed, taken from these books.
+The following material was instrumental in guiding my learning process:
 
 - [PHP & MySQL: Server-side Web Development][6]
 - [Programming PHP, 4th Edition][7]
